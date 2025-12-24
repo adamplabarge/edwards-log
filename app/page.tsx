@@ -1,56 +1,42 @@
-export const dynamic = "force-dynamic"; // This disables SSG and ISR
-
-import prisma from "@/lib/prisma";
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import { checkPostTableExists } from "@/lib/db-utils";
+import { auth0 } from "@/lib/auth0";
+import LoginButton from "@/app/components/LoginButton/LoginButton";
+import LogoutButton from "@/app/components/LogoutButton/LogoutButton";
+import SignupButton from "@/app/components/SignupButton/SignupButton";
+import Profile from "@/app/components/Profile/Profile";
+import Header from "@/app/Header";
 
 export default async function Home() {
-  // Check if the post table exists
-  const tableExists = await checkPostTableExists();
-
-  // If the post table doesn't exist, redirect to setup page
-  if (!tableExists) {
-    redirect("/setup");
-  }
-
-  const posts = await prisma.post.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-    take: 6,
-    include: {
-      author: {
-        select: {
-          name: true,
-        },
-      },
-    },
-  });
+  const session = await auth0.getSession();
+  const user = session?.user;
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center py-24 px-8">
-      <h1 className="text-5xl font-extrabold mb-12 text-[#333333]">Recent Posts</h1>
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl mb-8">
-        {posts.map((post) => (
-          <Link key={post.id} href={`/posts/${post.id}`} className="group">
-            <div className="border rounded-lg shadow-md bg-white p-6 hover:shadow-lg transition-shadow duration-300">
-              <h2 className="text-2xl font-semibold text-gray-900 group-hover:underline mb-2">{post.title}</h2>
-              <p className="text-sm text-gray-500">by {post.author ? post.author.name : "Anonymous"}</p>
-              <p className="text-xs text-gray-400 mb-4">
-                {new Date(post.createdAt).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </p>
-              <div className="relative">
-                <p className="text-gray-700 leading-relaxed line-clamp-2">{post.content || "No content available."}</p>
-                <div className="absolute bottom-0 left-0 w-full h-12 bg-linear-to-t from-gray-50 to-transparent" />
-              </div>
+    <div className="app-container">
+      <Header />
+      <div className="main-card-wrapper">
+        <img
+          src="https://cdn.auth0.com/quantum-assets/dist/latest/logos/auth0/auth0-lockup-en-ondark.png"
+          alt="Auth0 Logo"
+          className="auth0-logo"
+        />
+        <h1 className="main-title">Next.js + Auth0</h1>
+        
+        <div className="action-card">
+          {user ? (
+            <div className="logged-in-section">
+              <p className="logged-in-message">✅ Successfully logged in!</p>
+              <Profile />
+              <LogoutButton />
             </div>
-          </Link>
-        ))}
+          ) : (
+            <>
+              <p className="action-text">
+                Welcome! Please log in to access your protected content.
+              </p>
+              <LoginButton />
+              <SignupButton />
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

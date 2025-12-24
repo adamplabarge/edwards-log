@@ -12,7 +12,7 @@ export async function GET(request: Request) {
     skip: offset,
     take: postsPerPage,
     orderBy: { createdAt: "desc" },
-    include: { author: { select: { name: true } } },
+    include: { author: { select: { id: true } } },
   });
 
   const totalPosts = await prisma.post.count();
