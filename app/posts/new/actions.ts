@@ -2,11 +2,10 @@
 
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/auth";
+import { auth0 } from "@/lib/auth0";
 
 export async function createPost(formData: FormData) {
-  const session = await getServerSession(authOptions);
+  const session = await auth0.getSession();
   if (!session?.user) {
     throw new Error("You must be logged in to create a post");
   }
