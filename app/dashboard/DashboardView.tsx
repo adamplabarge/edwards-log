@@ -1,4 +1,5 @@
 import { Pet } from "@/prisma/generated/client";
+import Link from "next/link";
 
 type DashboardViewProps = {
   pets: Pet[];
@@ -21,14 +22,19 @@ export function DashboardView({
         <ul className="space-y-2 mb-6">
           {pets.map((pet) => (
             <li key={pet.id} className="border rounded p-3">
-              <h2 className="font-semibold">
-                {pet.name} ({pet.type})
-              </h2>
-              {pet.notes && (
-                <p className="text-sm text-gray-600">
-                  {pet.notes}
-                </p>
-              )}
+              <Link
+                href={`/pet/${pet.id}`}
+                className="block hover:underline"
+              >
+                <h2 className="font-semibold">
+                  {pet.name} ({pet.type})
+                </h2>
+                {pet.notes && (
+                  <p className="text-sm text-gray-600">
+                    {pet.notes}
+                  </p>
+                )}
+              </Link>
             </li>
           ))}
         </ul>
