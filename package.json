@@ -7,7 +7,7 @@
     "build": "npx prisma migrate deploy && next build",
     "start": "next start",
     "lint": "eslint .",
-    "postinstall": "npx prisma generate"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.14.0",
