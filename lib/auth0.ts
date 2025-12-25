@@ -34,7 +34,7 @@ export const auth0 = new Auth0Client({
     }
 
     return NextResponse.redirect(
-      new URL("/", process.env.APP_BASE_URL)
+      new URL("/dashboard", process.env.APP_BASE_URL)
     );
   },
 });
