@@ -1,26 +1,28 @@
 name: Deploy Next.js to Vercel
 
-on:
+on: 
   push:
-    branches:
-      - main   # triggers on main branch
+    branches: 
+      - main
+      - dev  # add when ready
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
-    env:
+    runs-on:  ubuntu-latest
+    env: 
       DATABASE_URL: ${{ github.ref == 'refs/heads/main' && secrets.PROD_DATABASE_URL || secrets.DEV_DATABASE_URL }}
-      POSTGRES_URL: ${{ github.ref == 'refs/heads/main' && secrets.PROD_POSTGRES_URL || secrets.DEV_POSTGRES_URL }}
-      PRISMA_DATABASE_URL: ${{ github.ref == 'refs/heads/main' && secrets.PROD_PRISMA_DATABASE_URL || secrets.DEV_PRISMA_DATABASE_URL }}  
+      POSTGRES_URL: ${{ github.ref == 'refs/heads/main' && secrets.PROD_POSTGRES_URL || secrets. DEV_POSTGRES_URL }}
+      PRISMA_DATABASE_URL: ${{ github.ref == 'refs/heads/main' && secrets.PROD_PRISMA_DATABASE_URL || secrets. DEV_PRISMA_DATABASE_URL }}  
       VERCEL_OIDC_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.PROD_VERCEL_OIDC_TOKEN || secrets.DEV_VERCEL_OIDC_TOKEN }}
-      AUTH0_DOMAIN: ${{ github.ref == 'refs/heads/main' && secrets.PROD_AUTH0_DOMAIN || secrets.DEV_AUTH0_DOMAIN }}
+      AUTH0_DOMAIN: ${{ github. ref == 'refs/heads/main' && secrets.PROD_AUTH0_DOMAIN || secrets. DEV_AUTH0_DOMAIN }}
       AUTH0_CLIENT_ID: ${{ github.ref == 'refs/heads/main' && secrets.PROD_AUTH0_CLIENT_ID || secrets.DEV_AUTH0_CLIENT_ID }}
       AUTH0_CLIENT_SECRET: ${{ github.ref == 'refs/heads/main' && secrets.PROD_AUTH0_CLIENT_SECRET || secrets.DEV_AUTH0_CLIENT_SECRET }}
-      AUTH0_SECRET: ${{ github.ref == 'refs/heads/main' && secrets.PROD_AUTH0_SECRET || secrets.DEV_AUTH0_SECRET }}
-    steps:
+      AUTH0_SECRET:  ${{ github.ref == 'refs/heads/main' && secrets.PROD_AUTH0_SECRET || secrets.DEV_AUTH0_SECRET }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps: 
       - uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Setup Node. js
         uses: actions/setup-node@v3
         with:
           node-version: 20
@@ -32,6 +34,4 @@ jobs:
         run: npm run build
 
       - name: Deploy to Vercel
-        run: npx vercel --prod --confirm
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: npx vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
