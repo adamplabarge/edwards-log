@@ -25,4 +25,43 @@ model Pet {
 
   ownerId   String
   owner     User     @relation(fields: [ownerId], references: [id])
+
+  // Relations
+  seizureEvents    SeizureEvent[]
+  feedingEvents    FeedingEvent[]
+  medicationEvents MedicationEvent[]
+  changeLines      ChangeLine[]
+}
+
+model SeizureEvent {
+  id     String   @id @default(uuid())
+  petId  String
+  pet    Pet      @relation(fields: [petId], references: [id])
+  date   DateTime
+  notes  String?
+}
+
+model FeedingEvent {
+  id     String   @id @default(uuid())
+  petId  String
+  pet    Pet      @relation(fields: [petId], references: [id])
+  date   DateTime
+  type   String
+  notes  String?
+}
+
+model MedicationEvent {
+  id     String   @id @default(uuid())
+  petId  String
+  pet    Pet      @relation(fields: [petId], references: [id])
+  date   DateTime
+  notes  String?
+}
+
+model ChangeLine {
+  id     String   @id @default(uuid())
+  petId  String
+  pet    Pet      @relation(fields: [petId], references: [id])
+  date   DateTime
+  label  String
 }
