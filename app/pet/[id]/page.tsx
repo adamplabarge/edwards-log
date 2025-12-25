@@ -27,6 +27,12 @@ export default async function PetPage(props: PageProps) {
       id: id,
       ownerId: user.id,
     },
+    include: {
+      seizureEvents: true,
+      feedingEvents: true,
+      medicationEvents: true,
+      changeLines: true,
+    },
   });
 
   if (!pet) {
