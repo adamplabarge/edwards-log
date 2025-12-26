@@ -21,10 +21,10 @@ export default function EventModal({ petId, event, onClose }: Props) {
   const [notes, setNotes] = useState(event?.notes ?? "");
   const [date, setDate] = useState<string>(
     event?.date
-      ? DateTime.fromJSDate(new Date(event.date))
+      ? DateTime.fromISO(event.date, { zone: "utc" })
           .toLocal()
           .toFormat("yyyy-MM-dd'T'HH:mm")
-      : DateTime.now().toFormat("yyyy-MM-dd'T'HH:mm")
+      : DateTime.now().toLocal().toFormat("yyyy-MM-dd'T'HH:mm")
   );
   const [dynamicFields, setDynamicFields] = useState<any>(() => {
     const copy = { ...event };
@@ -38,13 +38,25 @@ export default function EventModal({ petId, event, onClose }: Props) {
   async function save() {
     setLoading(true);
 
+    const utcDate = DateTime.fromFormat(
+      date,
+      "yyyy-MM-dd'T'HH:mm",
+      { zone: "local" }
+    ).toUTC().toISO();
+
+    if (utcDate !== null && !DateTime.fromISO(utcDate).isValid) {
+      alert("Invalid date");
+      setLoading(false);
+      return;
+    }
+
     const res = await fetch(`/api/pet/${petId}/events`, {
       method: event ? "PUT" : "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         id: event?.id,
         eventType,
-        date,
+        date: utcDate,
         notes,
         ...dynamicFields,
       }),
