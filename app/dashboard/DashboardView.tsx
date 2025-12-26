@@ -21,10 +21,14 @@ export function DashboardView({
       ) : (
         <ul className="space-y-2 mb-6">
           {pets.map((pet) => (
-            <li key={pet.id} className="border rounded p-3">
+            <li
+              key={pet.id}
+              className="border rounded p-3 flex items-center justify-between gap-4"
+            >
+              {/* Left: Pet details */}
               <Link
                 href={`/pet/${pet.id}`}
-                className="block hover:underline"
+                className="flex-1 hover:underline"
               >
                 <h2 className="font-semibold">
                   {pet.name} ({pet.type})
@@ -34,6 +38,14 @@ export function DashboardView({
                     {pet.notes}
                   </p>
                 )}
+              </Link>
+
+              {/* Right: Log link */}
+              <Link
+                href={`/pet/${pet.id}/log`}
+                className="text-sm px-3 py-1 border rounded hover:bg-gray-100 whitespace-nowrap"
+              >
+                Log Event
               </Link>
             </li>
           ))}
