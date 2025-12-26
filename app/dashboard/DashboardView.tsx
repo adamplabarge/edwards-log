@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import { Pet } from "@/prisma/generated/client";
 import Link from "next/link";
+import CreatePetModal from "@/app/dashboard/CreatePetModal";
 
 type DashboardViewProps = {
   pets: Pet[];
@@ -7,17 +11,23 @@ type DashboardViewProps = {
   onCreatePet: (formData: FormData) => void;
 };
 
-export function DashboardView({
-  pets,
-  userId,
-  onCreatePet,
-}: DashboardViewProps) {
+export function DashboardView({ pets, userId, onCreatePet }: DashboardViewProps) {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <main className="max-w-2xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Your Pets</h1>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Your Pets</h1>
+        <button
+          className="bg-blue-600 text-white px-4 py-2 rounded"
+          onClick={() => setShowModal(true)}
+        >
+          + Create Pet
+        </button>
+      </div>
 
       {pets.length === 0 ? (
-        <p className="text-gray-500">You don’t have any pets yet.</p>
+        <p className="text-gray-500 mb-6">You don’t have any pets yet.</p>
       ) : (
         <ul className="space-y-2 mb-6">
           {pets.map((pet) => (
@@ -25,25 +35,17 @@ export function DashboardView({
               key={pet.id}
               className="border rounded p-3 flex items-center justify-between gap-4"
             >
-              {/* Left: Pet details */}
-              <Link
-                href={`/pet/${pet.id}`}
-                className="flex-1 hover:underline"
-              >
+              <Link href={`/pet/${pet.id}`} className="flex-1 hover:underline">
                 <h2 className="font-semibold">
                   {pet.name} ({pet.type})
                 </h2>
                 {pet.notes && (
-                  <p className="text-sm text-gray-600">
-                    {pet.notes}
-                  </p>
+                  <p className="text-sm text-gray-600">{pet.notes}</p>
                 )}
               </Link>
-
-              {/* Right: Log link */}
               <Link
                 href={`/pet/${pet.id}/log`}
-                className="text-sm px-3 py-1 border rounded hover:bg-gray-100 whitespace-nowrap"
+                className="text-sm px-3 py-1 border rounded bg-yellow-900 hover:bg-yellow-800 whitespace-nowrap"
               >
                 Log Event
               </Link>
@@ -52,40 +54,13 @@ export function DashboardView({
         </ul>
       )}
 
-      {/* Create pet */}
-      <form
-        action={onCreatePet}
-        className="space-y-3 border-t pt-4"
-      >
-        <h2 className="font-semibold">Add a New Pet</h2>
-
-        <input
-          name="name"
-          placeholder="Pet name"
-          required
-          className="w-full border rounded p-2"
+      {/* Create Pet Modal */}
+      {showModal && (
+        <CreatePetModal
+          onClose={() => setShowModal(false)}
+          onCreate={onCreatePet}
         />
-
-        <input
-          name="type"
-          placeholder="Pet type"
-          required
-          className="w-full border rounded p-2"
-        />
-
-        <textarea
-          name="notes"
-          placeholder="Notes (optional)"
-          className="w-full border rounded p-2"
-        />
-
-        <button
-          type="submit"
-          className="bg-black text-white px-4 py-2 rounded"
-        >
-          Add Pet
-        </button>
-      </form>
+      )}
     </main>
   );
 }
