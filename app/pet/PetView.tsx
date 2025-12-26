@@ -2,27 +2,14 @@
 
 import { useState } from "react";
 import { DateTime } from "luxon";
-import { Pet } from "@/prisma/generated/client";
 import SeizureScatterChart from "@/app/components/Charts/SeizureScatterChart";
 import SeizureRiskHistogram from "@/app/components/Charts/SeirzuresRiskHistogram";
-import {
-  SeizureEvent,
-  FeedingEvent,
-  MedicationEvent,
-  ChangeLine,
-} from "@/prisma/generated/client";
 import Link from "next/link";
 import { ClipboardIcon } from "@heroicons/react/24/outline";
-
-type petWithRelations = {
-  seizureEvents: SeizureEvent[];
-  feedingEvents: FeedingEvent[];
-  medicationEvents: MedicationEvent[];
-  changeLines: ChangeLine[];
-} & Pet;
+import type { PetWithRelations } from "./types/PetWithRelations.type";
 
 type PetViewProps = {
-  pet: petWithRelations;
+  pet: PetWithRelations;
   hideShare?: boolean;
   shareLink?: string | null;
 };
