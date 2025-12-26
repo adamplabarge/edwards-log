@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 
+/*
+  Handles creating and retrieving pet share links.
+  */
 export async function GET(
   _req: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -22,6 +25,9 @@ export async function GET(
   });
 }
 
+/*
+  Handles creating pet share links.
+  */
 export async function POST(
   _req: Request,
   { params }: { params: Promise<{ id: string }> }

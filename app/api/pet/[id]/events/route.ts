@@ -4,6 +4,9 @@ import { getCurrentUser } from "@/lib/auth";
 
 type EventType = "seizure" | "feeding" | "medication" | "change";
 
+/*
+  Handles creating and updating pet events.
+  */
 export async function POST(
   req: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -89,6 +92,9 @@ export async function POST(
   return NextResponse.json({ success: true });
 }
 
+/*
+  Handles updating pet events.
+  */
 export async function PUT(
   req: Request,
   { params }: { params: Promise<{ id: string }> }
