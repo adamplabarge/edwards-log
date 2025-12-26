@@ -52,7 +52,7 @@ export function PetView({ pet, hideShare = true, shareLink = null }: PetViewProp
           <Link href="/dashboard" className="hover:underline">
             Dashboard
           </Link>{" "}
-          / <span className="text-gray-700 font-medium">{pet.name}</span>
+          / <span className="text-gray-700 font-medium">Charts</span>
         </nav>
       )}
 
