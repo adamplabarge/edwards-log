@@ -6,7 +6,7 @@ import LogoutButton from '@/app/components/LogoutButton/LogoutButton';
 import SignupButton from '@/app/components/SignupButton/SignupButton';
 
 export default function Header() {
-  const { user, error, isLoading } = useUser();
+  const { user, isLoading } = useUser();
 
   return (
     <header className="flex items-center justify-between p-4 bg-gray-900 text-white">
@@ -17,8 +17,6 @@ export default function Header() {
       <div className="space-x-2">
         {isLoading ? (
           'Loading...'
-        ) : error ? (
-          `Error: ${error.message}`
         ) : user ? (
           <>
             <span className="mr-2">Hello, {user.name}</span>
