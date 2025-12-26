@@ -45,7 +45,8 @@ export default function HomePage() {
           and charts that highlight patterns and important changes.
         </p>
         <p className="mb-2 w-3/4">
-          Currently optimized for dogs, with more pet types coming soon! (Edward two dog brothers, a cat brother and bird sister.)
+          Currently optimized for dogs, with more pet types coming soon! Afterall,
+          Edward has two other dog brothers, a void cat brother and a parrot sister.
         </p>
       </section>
 
