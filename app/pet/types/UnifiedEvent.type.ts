@@ -7,7 +7,7 @@ export type UnifiedEventType =
 export type UnifiedEvent = {
   id: string;
   eventType: UnifiedEventType;
-  date: Date;
+  date: string; // ISO 8601, UTC (e.g. "2025-12-04T13:00:00Z")
   notes?: string;
 
   feedingType?: string;

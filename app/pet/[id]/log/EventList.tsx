@@ -39,14 +39,14 @@ export default function EventList({ pet, onEdit }: Props) {
     ...pet.seizureEvents.map((e) => ({
       id: e.id,
       eventType: "seizure" as const,
-      date: e.date,
+      date: e.date.toISOString(),
       notes: e.notes ?? undefined,
     })),
 
     ...pet.feedingEvents.map((e) => ({
       id: e.id,
       eventType: "feeding" as const,
-      date: e.date,
+      date: e.date.toISOString(),
       notes: e.notes ?? undefined,
       feedingType: e.type,
     })),
@@ -54,19 +54,19 @@ export default function EventList({ pet, onEdit }: Props) {
     ...pet.medicationEvents.map((e) => ({
       id: e.id,
       eventType: "medication" as const,
-      date: e.date,
+      date: e.date.toISOString(),
       notes: e.notes ?? undefined,
     })),
 
     ...pet.changeLines.map((e) => ({
       id: e.id,
       eventType: "change" as const,
-      date: e.date,
+      date: e.date.toISOString(),
       changeLabel: e.label,
     })),
   ]
     // newest first
-    .sort((a, b) => b.date.getTime() - a.date.getTime());
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   if (events.length === 0) {
     return <p className="text-sm text-gray-500">No events logged yet.</p>;
@@ -91,7 +91,7 @@ export default function EventList({ pet, onEdit }: Props) {
               </span>
               <span className="text-gray-400">·</span>
               <span className="text-gray-500">
-                {DateTime.fromJSDate(event.date).toLocaleString(
+                {DateTime.fromJSDate(new Date(event.date)).toLocaleString(
                   DateTime.DATETIME_MED
                 )}
               </span>
