@@ -15,19 +15,19 @@ export default function HomePage() {
         </p>
         <div className="max-w-6xl mx-auto flex justify-center">
           <Image
-            src="/images/hero-alt.png"
+            src="/images/hero-alt2.png"
             alt="Hero"
-            width={879}
-            height={932}
+            width={891}
+            height={981}
             className="rounded-lg shadow-lg"
           />
         </div>
         <div className="max-w-6xl mx-auto flex justify-center mt-12">
           <Image
-            src="/images/log.png"
+            src="/images/event-logs.png"
             alt="log"
-            width={660}
-            height={688}
+            width={657}
+            height={910}
             className="rounded-lg shadow-lg"
           />
         </div>

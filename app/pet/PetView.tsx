@@ -112,28 +112,27 @@ export function PetView({
           />
         </div>
 
-        <div className="flex flex-wrap justify-between gap-4">
-          <div className="flex flex-wrap justify-between gap-4">
-            <div className="w-full md:w-[calc(50%-1rem)]">
-              <SeizureRiskHistogram
-                startDate={startDate}
-                endDate={endDate}
-                mode="feeding"
-                seizureData={pet.seizureEvents}
-                medicationData={pet.medicationEvents}
-                feedingData={pet.feedingEvents}
-              />
-            </div>
-            <div className="w-full md:w-[calc(50%-1rem)]">
-              <SeizureRiskHistogram
-                startDate={startDate}
-                endDate={endDate}
-                mode="medication"
-                seizureData={pet.seizureEvents}
-                medicationData={pet.medicationEvents}
-                feedingData={pet.feedingEvents}
-              />
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="min-h-[240px] md:min-h-[250px]">
+            <SeizureRiskHistogram
+              startDate={startDate}
+              endDate={endDate}
+              mode="feeding"
+              seizureData={pet.seizureEvents}
+              medicationData={pet.medicationEvents}
+              feedingData={pet.feedingEvents}
+            />
+          </div>
+
+          <div className="min-h-[240px] md:min-h-[250px]">
+            <SeizureRiskHistogram
+              startDate={startDate}
+              endDate={endDate}
+              mode="medication"
+              seizureData={pet.seizureEvents}
+              medicationData={pet.medicationEvents}
+              feedingData={pet.feedingEvents}
+            />
           </div>
         </div>
       </section>
