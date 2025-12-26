@@ -14,8 +14,8 @@ export default function HomePage() {
           <Image
             src="/images/hero.png"
             alt="Hero"
-            width={828}
-            height={781}
+            width={902}
+            height={559}
             className="rounded-lg shadow-lg"
           />
         </div>
