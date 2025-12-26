@@ -33,7 +33,6 @@ export default function Header() {
           "Loading..."
         ) : user ? (
           <>
-            <span className="mr-2">Hello, {user.name}</span>
             <LogoutButton />
           </>
         ) : (
