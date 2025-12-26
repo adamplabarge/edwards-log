@@ -14,7 +14,11 @@ type PetViewProps = {
   shareLink?: string | null;
 };
 
-export function PetView({ pet, hideShare = true, shareLink = null }: PetViewProps) {
+export function PetView({
+  pet,
+  hideShare = true,
+  shareLink = null,
+}: PetViewProps) {
   const [shareUrl, setShareUrl] = useState<string | null>(shareLink);
 
   const [startDate, setStartDate] = useState(
@@ -109,25 +113,27 @@ export function PetView({ pet, hideShare = true, shareLink = null }: PetViewProp
         </div>
 
         <div className="flex flex-wrap justify-between gap-4">
-          <div className="flex-[calc(50%-1rem)]">
-            <SeizureRiskHistogram
-              startDate={startDate}
-              endDate={endDate}
-              mode="feeding"
-              seizureData={pet.seizureEvents}
-              medicationData={pet.medicationEvents}
-              feedingData={pet.feedingEvents}
-            />
-          </div>
-          <div className="flex-[calc(50%-1rem)]">
-            <SeizureRiskHistogram
-              startDate={startDate}
-              endDate={endDate}
-              mode="medication"
-              seizureData={pet.seizureEvents}
-              medicationData={pet.medicationEvents}
-              feedingData={pet.feedingEvents}
-            />
+          <div className="flex flex-wrap justify-between gap-4">
+            <div className="w-full md:w-[calc(50%-1rem)]">
+              <SeizureRiskHistogram
+                startDate={startDate}
+                endDate={endDate}
+                mode="feeding"
+                seizureData={pet.seizureEvents}
+                medicationData={pet.medicationEvents}
+                feedingData={pet.feedingEvents}
+              />
+            </div>
+            <div className="w-full md:w-[calc(50%-1rem)]">
+              <SeizureRiskHistogram
+                startDate={startDate}
+                endDate={endDate}
+                mode="medication"
+                seizureData={pet.seizureEvents}
+                medicationData={pet.medicationEvents}
+                feedingData={pet.feedingEvents}
+              />
+            </div>
           </div>
         </div>
       </section>
