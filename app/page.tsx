@@ -1,14 +1,15 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
+import Image from "next/image";
 
 export default function HomePage() {
-
   return (
     <div className="space-y-20">
       {/* Hero Section */}
       <section className="text-center py-16 bg-yellow-50">
-        <h1 className="text-4xl font-bold mb-4 text-gray-900">A way to track dog seizures</h1>
+        <h1 className="text-4xl font-bold mb-4 text-gray-900">
+          A way to track dog seizures
+        </h1>
         <div className="max-w-6xl mx-auto flex justify-center">
           <Image
             src="/images/hero.png"
@@ -24,10 +25,12 @@ export default function HomePage() {
       <section className="max-w-4xl mx-auto px-4">
         <h2 className="text-2xl font-semibold mb-4">How it works</h2>
         <p className="mb-2">
-          Sign up (via Auth0) and add your dog. Track feedings, medications, seizures, and changes.
+          Create your free account and add your furry friend. Effortlessly log
+          feedings, medications, and health events, all in one place.
         </p>
         <p className="mb-2">
-          All data is visualized in charts using Chart.js, including timeline scatter plots and time-since-last-event charts.
+          See your dog’s health at a glance with easy-to-read visual timelines
+          and charts that highlight patterns and important changes.
         </p>
       </section>
 
@@ -36,7 +39,9 @@ export default function HomePage() {
         <div className="flex-1">
           <h2 className="text-2xl font-semibold mb-4">Why I made this site</h2>
           <p className="mb-2">
-            I created this to track my own dog's seizures, feedings, medications, and changes. Changes are like adjusting pills per day, and these show up as vertical lines on charts.
+            Built from personal experience, this app helps you keep a close eye
+            on your dog’s health—track seizures, meals, medications, and
+            treatment adjustments, all visualized clearly on intuitive charts.
           </p>
         </div>
         <div className="flex-1">
@@ -51,19 +56,27 @@ export default function HomePage() {
       </section>
 
       {/* Under Construction Section */}
-      <section className="max-w-4xl mx-auto px-4 text-center py-16 rounded-lg">
+      <section className="max-w-4xl mx-auto px-4 py-16 rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">Under Construction</h2>
         <p className="mb-2">
-          The site is still under development and features may change. One the list is custom tracking events and download data.
+          Edward’s Log is constantly evolving, and new features are on the
+          way—think custom tracking events and easy data downloads.
         </p>
         <p className="mb-2">
-          Feature requests? Leave an issue on my <a className="text-blue-600 underline" href="https://github.com/adamplabarge/edwards-log/issues" target="_blank" rel="noopener noreferrer">GitHub</a>.
+          Have an idea or feature request? Share it on my{" "}
+          <a
+            className="text-blue-600 underline"
+            href="https://github.com/adamplabarge/edwards-log/issues"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          .
         </p>
         <p className="mb-2">
-          We do not track or capture any personal data. Email addresses and passwords are managed by Auth0.
-        </p>
-        <p>
-          We are working on a way to notify users of changes and allow data downloads.
+          Your privacy is our priority. We do not track or store personal
+          information—email addresses and passwords are safely handled by Auth0.
         </p>
       </section>
     </div>
