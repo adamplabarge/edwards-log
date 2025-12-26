@@ -12,10 +12,10 @@ export default function HomePage() {
         </h1>
         <div className="max-w-6xl mx-auto flex justify-center">
           <Image
-            src="/images/hero-large.png"
+            src="/images/hero-alt.png"
             alt="Hero"
-            width={888}
-            height={944}
+            width={879}
+            height={932}
             className="rounded-lg shadow-lg"
           />
         </div>
