@@ -4,6 +4,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 import LoginButton from '@/app/components/LoginButton/LoginButton';
 import LogoutButton from '@/app/components/LogoutButton/LogoutButton';
 import SignupButton from '@/app/components/SignupButton/SignupButton';
+import Link from 'next/link';
 
 export default function Header() {
   const { user, isLoading } = useUser();
@@ -11,7 +12,7 @@ export default function Header() {
   return (
     <header className="flex items-center justify-between p-4 bg-gray-900 text-white">
       {/* Left: Site name */}
-      <div className="text-xl font-bold">Edward's Log</div>
+      <div className="text-xl font-bold"><Link href="/">Edward's Log</Link></div>
 
       {/* Right: Auth buttons */}
       <div className="space-x-2">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { DateTime } from "luxon";
 import { Pet } from "@/prisma/generated/client";
 import SeizureScatterChart from "@/app/components/Charts/SeizureScatterChart";
@@ -11,7 +11,8 @@ import {
   MedicationEvent,
   ChangeLine,
 } from "@/prisma/generated/client";
-import Link from 'next/link';
+import Link from "next/link";
+import { ClipboardIcon } from "@heroicons/react/24/outline";
 
 type petWithRelations = {
   seizureEvents: SeizureEvent[];
@@ -23,26 +24,16 @@ type petWithRelations = {
 type PetViewProps = {
   pet: petWithRelations;
   hideShare?: boolean;
+  shareLink?: string | null;
 };
 
-export function PetView({ pet, hideShare }: PetViewProps) {
-  const [shareUrl, setShareUrl] = useState<string | null>(null);
+export function PetView({ pet, hideShare = true, shareLink = null }: PetViewProps) {
+  const [shareUrl, setShareUrl] = useState<string | null>(shareLink);
 
   const [startDate, setStartDate] = useState(
     DateTime.now().minus({ months: 3 }).toISODate()
   );
   const [endDate, setEndDate] = useState(DateTime.now().toISODate());
-
-  useEffect(() => {
-    async function fetchShareLink() {
-      const res = await fetch(`/api/pet/${pet.id}/share`);
-      if (res.ok) {
-        const data = await res.json();
-        setShareUrl(data.shareUrl);
-      }
-    }
-    if (!hideShare) fetchShareLink();
-  }, [pet.id]);
 
   const resetDates = () => {
     setStartDate("");
@@ -82,39 +73,6 @@ export function PetView({ pet, hideShare }: PetViewProps) {
       <section className="space-y-2">
         <h1 className="text-3xl font-bold">{pet.name}</h1>
       </section>
-
-      {/* Share Link Button */}
-      {!hideShare && (
-        <section>
-          {shareUrl ? (
-            <div className="mt-2">
-              <input
-                type="text"
-                readOnly
-                value={window.location.origin + shareUrl}
-                className="border p-1 w-full"
-              />
-              <button
-                onClick={() =>
-                  navigator.clipboard.writeText(
-                    window.location.origin + shareUrl
-                  )
-                }
-                className="mt-1 px-3 py-1 border rounded"
-              >
-                Copy Link
-              </button>
-            </div>
-          ) : (
-            <button
-              className="px-3 py-1 border rounded"
-              onClick={createShareLink}
-            >
-              Generate Share Link
-            </button>
-          )}
-        </section>
-      )}
 
       {/* Date filters */}
       <section className="flex flex-wrap gap-4 items-center">
@@ -186,6 +144,45 @@ export function PetView({ pet, hideShare }: PetViewProps) {
           </div>
         </div>
       </section>
+
+      {/* Share Link Button */}
+      {!hideShare && (
+        <section>
+          {shareUrl ? (
+            <>
+              Share Link:
+              <div className="mt-2 flex items-center gap-2">
+                <button
+                  onClick={() =>
+                    navigator.clipboard.writeText(
+                      window.location.origin + `/pet/share/${shareUrl}`
+                    )
+                  }
+                  className="p-2 rounded border hover:bg-gray-100 transition"
+                  title="Copy link"
+                  aria-label="Copy share link"
+                >
+                  <ClipboardIcon className="h-5 w-5 text-gray-600" />
+                </button>
+
+                <input
+                  type="text"
+                  readOnly
+                  value={window.location.origin + `/pet/share/${shareUrl}`}
+                  className="flex-1 border rounded px-2 py-1 text-sm"
+                />
+              </div>
+            </>
+          ) : (
+            <button
+              className="px-3 py-1 border rounded"
+              onClick={createShareLink}
+            >
+              Generate Share Link
+            </button>
+          )}
+        </section>
+      )}
     </main>
   );
 }

@@ -32,6 +32,7 @@ export default async function PetPage(props: PageProps) {
       feedingEvents: true,
       medicationEvents: true,
       changeLines: true,
+      shareLinks: true,
     },
   });
 
@@ -39,5 +40,9 @@ export default async function PetPage(props: PageProps) {
     notFound();
   }
 
-  return <PetView pet={pet} />;
+  return <PetView
+    pet={pet}
+    hideShare={false}
+    shareLink={pet?.shareLinks[0]?.id || null}
+  />;
 }
