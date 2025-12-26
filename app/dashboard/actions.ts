@@ -2,6 +2,9 @@
 
 import { prisma } from "@/lib/prisma";
 
+/*
+  Handles creating a new pet for the current user.
+  */
 export async function createPet(
   userId: string,
   formData: FormData

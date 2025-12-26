@@ -10,7 +10,6 @@ export type UnifiedEvent = {
   date: Date;
   notes?: string;
 
-  // Optional fields by type
   feedingType?: string;
   changeLabel?: string;
 };
