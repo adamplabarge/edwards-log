@@ -22,6 +22,13 @@ export default async function LogEventPage({ params }: Props) {
       id: petId,
       ownerId: user.id,
     },
+    include: {
+      seizureEvents: true,
+      feedingEvents: true,
+      medicationEvents: true,
+      changeLines: true,
+      shareLinks: true,
+    },
   });
 
   if (!pet) {

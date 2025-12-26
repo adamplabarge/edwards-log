@@ -10,7 +10,7 @@ export default function Header() {
   const { user, isLoading } = useUser();
 
   return (
-    <header className="flex items-center justify-between p-4 bg-gray-900 text-white">
+    <header className="flex items-center justify-between p-4 bg-gray-950 text-white">
       {/* Left: Site name */}
       <div className="text-xl font-bold"><Link href="/">Edward's Log</Link></div>
 
