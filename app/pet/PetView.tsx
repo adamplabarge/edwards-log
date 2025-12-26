@@ -1,28 +1,47 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DateTime } from "luxon";
 import { Pet } from "@/prisma/generated/client";
 import SeizureScatterChart from "@/app/components/Charts/SeizureScatterChart";
 import SeizureRiskHistogram from "@/app/components/Charts/SeirzuresRiskHistogram";
-import { SeizureEvent, FeedingEvent, MedicationEvent, ChangeLine } from "@/prisma/generated/client";
+import {
+  SeizureEvent,
+  FeedingEvent,
+  MedicationEvent,
+  ChangeLine,
+} from "@/prisma/generated/client";
 
 type petWithRelations = {
-  seizureEvents: SeizureEvent[]
-  feedingEvents: FeedingEvent[]
-  medicationEvents: MedicationEvent[]
-  changeLines: ChangeLine[]
+  seizureEvents: SeizureEvent[];
+  feedingEvents: FeedingEvent[];
+  medicationEvents: MedicationEvent[];
+  changeLines: ChangeLine[];
 } & Pet;
 
 type PetViewProps = {
   pet: petWithRelations;
+  hideShare?: boolean;
 };
 
-export function PetView({ pet }: PetViewProps) {
+export function PetView({ pet, hideShare }: PetViewProps) {
+  const [shareUrl, setShareUrl] = useState<string | null>(null);
+
   const [startDate, setStartDate] = useState(
     DateTime.now().minus({ months: 3 }).toISODate()
   );
   const [endDate, setEndDate] = useState(DateTime.now().toISODate());
+
+  useEffect(() => {
+    async function fetchShareLink() {
+      const res = await fetch(`/api/pet/${pet.id}/share`);
+      if (res.ok) {
+        const data = await res.json();
+        setShareUrl(data.shareUrl);
+      }
+    }
+    if (!hideShare) fetchShareLink();
+  }, [pet.id]);
 
   const resetDates = () => {
     setStartDate("");
@@ -39,6 +58,13 @@ export function PetView({ pet }: PetViewProps) {
     setEndDate(DateTime.now().toISODate());
   };
 
+  const createShareLink = async () => {
+    const res = await fetch(`/api/pet/${pet.id}/share`, { method: "POST" });
+    const data = await res.json();
+    if (res.ok) setShareUrl(data.shareUrl);
+    else alert(data.error);
+  };
+
   return (
     <main className="max-w-4xl mx-auto p-6 space-y-6">
       {/* Pet info */}
@@ -47,10 +73,41 @@ export function PetView({ pet }: PetViewProps) {
         <p className="text-gray-600">
           Type: <span className="font-medium">{pet.type}</span>
         </p>
-        {pet.notes && (
-          <p className="border rounded p-3">{pet.notes}</p>
-        )}
+        {pet.notes && <p className="border rounded p-3">{pet.notes}</p>}
       </section>
+
+      {/* Share Link Button */}
+      {!hideShare && (
+        <section>
+          {shareUrl ? (
+            <div className="mt-2">
+              <input
+                type="text"
+                readOnly
+                value={window.location.origin + shareUrl}
+                className="border p-1 w-full"
+              />
+              <button
+                onClick={() =>
+                  navigator.clipboard.writeText(
+                    window.location.origin + shareUrl
+                  )
+                }
+                className="mt-1 px-3 py-1 border rounded"
+              >
+                Copy Link
+              </button>
+            </div>
+          ) : (
+            <button
+              className="px-3 py-1 border rounded"
+              onClick={createShareLink}
+            >
+              Generate Share Link
+            </button>
+          )}
+        </section>
+      )}
 
       {/* Date filters */}
       <section className="flex flex-wrap gap-4 items-center">
@@ -89,7 +146,14 @@ export function PetView({ pet }: PetViewProps) {
       {/* Charts */}
       <section className="space-y-12">
         <div className="w-full overflow-x-auto">
-          <SeizureScatterChart startDate={startDate} endDate={endDate} seizureData={pet.seizureEvents} medicationData={pet.medicationEvents} feedingData={pet.feedingEvents} changeLines={pet.changeLines} />
+          <SeizureScatterChart
+            startDate={startDate}
+            endDate={endDate}
+            seizureData={pet.seizureEvents}
+            medicationData={pet.medicationEvents}
+            feedingData={pet.feedingEvents}
+            changeLines={pet.changeLines}
+          />
         </div>
 
         <div className="flex flex-wrap justify-between gap-4">
