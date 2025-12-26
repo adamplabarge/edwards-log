@@ -4,8 +4,8 @@ import "./globals.css";
 import Providers from "./providers";
 
 export const metadata = {
-  title: "Superblog",
-  description: "A blog app using Next.js and Prisma",
+  title: "Edward's Log",
+  description: "A way to track and visualize seizure data for pets.",
 };
 
 export default function RootLayout({
