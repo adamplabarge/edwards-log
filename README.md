@@ -1,4 +1,15 @@
-# Next.js & Prisma Postgres Auth Starter
+# Edward's Log
+
+This is a site to track dog (and other pet) seizures and events. I made this to track my own dogs seizures. It is also a demo site for how to get a NextJS app with Auth0 and Prisma Postgres database working. 
+
+### Features
+- Protected Routes
+- CRUD opperations
+- Share links
+
+The original template instructions are below.
+
+## Next.js & Prisma Postgres Auth Starter
 
 This repository provides a boilerplate to quickly set up a Next.js demo application with authentication using [NextAuth.js v4](https://next-auth.js.org/), [Prisma Postgres](https://www.prisma.io/postgres) and [Prisma ORM](https://www.prisma.io/orm), and deploy it to Vercel. It includes an easy setup process and example routes that demonstrate basic CRUD operations against the database.
 

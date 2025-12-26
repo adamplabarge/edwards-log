@@ -11,6 +11,7 @@ import {
   MedicationEvent,
   ChangeLine,
 } from "@/prisma/generated/client";
+import Link from 'next/link';
 
 type petWithRelations = {
   seizureEvents: SeizureEvent[];
@@ -67,13 +68,19 @@ export function PetView({ pet, hideShare }: PetViewProps) {
 
   return (
     <main className="max-w-4xl mx-auto p-6 space-y-6">
+      {/* Breadcrumb */}
+      {!hideShare && (
+        <nav className="text-gray-500 text-sm">
+          <Link href="/dashboard" className="hover:underline">
+            Dashboard
+          </Link>{" "}
+          / <span className="text-gray-700 font-medium">{pet.name}</span>
+        </nav>
+      )}
+
       {/* Pet info */}
       <section className="space-y-2">
         <h1 className="text-3xl font-bold">{pet.name}</h1>
-        <p className="text-gray-600">
-          Type: <span className="font-medium">{pet.type}</span>
-        </p>
-        {pet.notes && <p className="border rounded p-3">{pet.notes}</p>}
       </section>
 
       {/* Share Link Button */}

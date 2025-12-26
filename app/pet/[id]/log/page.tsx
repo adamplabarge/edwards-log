@@ -22,10 +22,6 @@ export default async function LogEventPage({ params }: Props) {
       id: petId,
       ownerId: user.id,
     },
-    select: {
-      id: true,
-      name: true,
-    },
   });
 
   if (!pet) {
@@ -33,13 +29,6 @@ export default async function LogEventPage({ params }: Props) {
   }
 
   return (
-    <main className="max-w-xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold">
-        Log Event for {pet.name}
-      </h1>
-
-      {/* Client-only UI */}
-      <LogEventView petId={pet.id} />
-    </main>
+    <LogEventView pet={pet} />
   );
 }
