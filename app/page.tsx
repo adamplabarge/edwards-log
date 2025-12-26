@@ -6,10 +6,13 @@ export default function HomePage() {
   return (
     <div className="space-y-20">
       {/* Hero Section */}
-      <section className="text-center py-16 bg-yellow-50">
-        <h1 className="text-4xl font-bold mb-4 text-gray-900 font-semibold">
+      <section className="text-center py-16">
+        <h1 className="text-4xl font-bold mb-4 font-semibold">
           A Way To Track Pet Seizures
         </h1>
+        <p className="mt-12 mb-16 font-semibold text-2xl">
+          Charts and logs to help you monitor your pet's activies and seizures
+        </p>
         <div className="max-w-6xl mx-auto flex justify-center">
           <Image
             src="/images/hero-alt.png"
@@ -19,10 +22,7 @@ export default function HomePage() {
             className="rounded-lg shadow-lg"
           />
         </div>
-        <p className="text-gray-700 dark:text-gray-900 mt-4 mb-4 font-semibold text-1xl">
-          Charts and Logs to help you monitor your pet's health.
-        </p>
-        <div className="max-w-6xl mx-auto flex justify-center">
+        <div className="max-w-6xl mx-auto flex justify-center mt-12">
           <Image
             src="/images/log.png"
             alt="log"
