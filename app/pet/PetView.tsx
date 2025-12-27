@@ -72,7 +72,6 @@ export function PetView({
       <TimeSinceLastSeizure seizures={pet.seizureEvents} />
       
       {/* Date filters */}
-      <h3 className="mb-2 text-lg font-semibold">Seizure Timeline Chart</h3>
       <section className="flex flex-wrap gap-4 items-center">
         <label>
           Start:{" "}
@@ -108,6 +107,7 @@ export function PetView({
 
       {/* Charts */}
       <section className="space-y-12">
+        <h3 className="mb-2 text-lg font-semibold">Seizure Timeline Chart</h3>
         <div className="w-full overflow-x-auto">
           <SeizureScatterChart
             startDate={startDate}
