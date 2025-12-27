@@ -14,7 +14,7 @@ export default function HomePage() {
           Charts and logs to help you monitor your pet's activies and seizures
         </p>
         <div className="block dark:hidden">
-          <div className="max-w-6xl mx-auto flex justify-center">
+          <div className="max-w-6xl mx-auto flex justify-center mb-4">
             <Image
               src="/images/hero-part-1-lt.png"
               alt="Hero"
@@ -23,7 +23,16 @@ export default function HomePage() {
               className="rounded-lg shadow-lg"
             />
           </div>
-          <div className="max-w-6xl mx-auto flex justify-center">
+          <div className="max-w-6xl mx-auto flex justify-center mb-4">
+            <Image
+              src="/images/hero-part-3-lt.png"
+              alt="Hero"
+              width={877}
+              height={610}
+              className="rounded-lg shadow-lg"
+            />
+          </div>
+          <div className="max-w-6xl mx-auto flex justify-center mb-4">
             <Image
               src="/images/hero-part-2-lt.png"
               alt="Hero"
@@ -43,7 +52,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="hidden dark:block">
-          <div className="max-w-6xl mx-auto flex justify-center">
+          <div className="max-w-6xl mx-auto flex justify-center mb-4">
             <Image
               src="/images/hero-part-1.png"
               alt="Hero"
@@ -52,7 +61,16 @@ export default function HomePage() {
               className="rounded-lg shadow-lg"
             />
           </div>
-          <div className="max-w-6xl mx-auto flex justify-center">
+          <div className="max-w-6xl mx-auto flex justify-center mb-4">
+            <Image
+              src="/images/hero-part-3.png"
+              alt="Hero"
+              width={877}
+              height={606}
+              className="rounded-lg shadow-lg"
+            />
+          </div>
+          <div className="max-w-6xl mx-auto flex justify-center mb-4">
             <Image
               src="/images/hero-part-2.png"
               alt="Hero"
