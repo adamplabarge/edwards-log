@@ -13,6 +13,7 @@ type Props = {
 };
 
 export default function EventModal({ petId, event, onClose }: Props) {
+  console.log("EventModal props:", { petId, event });
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [eventType, setEventType] = useState<EventType>(
@@ -34,6 +35,8 @@ export default function EventModal({ petId, event, onClose }: Props) {
     delete copy.id;
     return copy;
   });
+
+  console.log("Dynamic fields:", dynamicFields);
 
   async function save() {
     setLoading(true);
@@ -89,6 +92,7 @@ export default function EventModal({ petId, event, onClose }: Props) {
             <option value="seizure">Seizure</option>
             <option value="feeding">Feeding</option>
             <option value="medication">Medication</option>
+            <option value="activity">Activity</option>
             <option value="change">Change</option>
           </select>
         )}

@@ -109,8 +109,11 @@ export function PetView({
             medicationData={pet.medicationEvents}
             feedingData={pet.feedingEvents}
             changeLines={pet.changeLines}
+            activityData={pet.activityEvents}
           />
         </div>
+
+        <h3>Seizure Risk Histograms</h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="min-h-[240px] md:min-h-[250px]">

@@ -7,6 +7,11 @@ datasource db {
   provider = "postgresql"
 }
 
+enum MedicationType {
+  ASM   // Antiseizure Medications
+  OTHER // Other
+}
+
 model User {
   id        String   @id @default(uuid())
   sub       String   @unique
@@ -30,9 +35,11 @@ model Pet {
   seizureEvents    SeizureEvent[]
   feedingEvents    FeedingEvent[]
   medicationEvents MedicationEvent[]
+  activityEvents   ActivityEvent[]
   changeLines      ChangeLine[]
   shareLinks       PetShareLink[]
 }
+
 
 model SeizureEvent {
   id     String   @id @default(uuid())
@@ -54,11 +61,22 @@ model FeedingEvent {
 }
 
 model MedicationEvent {
-  id     String   @id @default(uuid())
-  petId  String
-  pet    Pet      @relation(fields: [petId], references: [id])
-  date   DateTime
-  notes  String?
+  id        String   @id @default(uuid())
+  petId     String
+  pet       Pet      @relation(fields: [petId], references: [id])
+  date      DateTime
+  type      MedicationType @default(ASM)
+  notes     String?
+  createdAt DateTime @default(now())
+}
+
+model ActivityEvent {
+  id        String   @id @default(uuid())
+  petId     String
+  pet       Pet      @relation(fields: [petId], references: [id])
+  date      DateTime
+  type      String
+  notes     String?
   createdAt DateTime @default(now())
 }
 

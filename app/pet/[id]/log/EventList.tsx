@@ -3,8 +3,9 @@ import { UnifiedEvent } from "@/app/pet/types/UnifiedEvent.type";
 import { DateTime } from "luxon";
 import { useState } from "react";
 import EventFilters from "./EventFilters";
-import { getEventColor, isSameDay } from "./utils";
+import { getEventColor, getEventLabel, isSameDay } from "./utils";
 import { EVENT_COLORS } from "@/app/pet/constants";
+import { EventMenu } from "./EventMenu";
 
 type Props = {
   pet: PetWithRelations;
@@ -41,7 +42,7 @@ export default function EventList({ pet, onEdit }: Props) {
       eventType: "feeding" as const,
       date: e.date.toISOString(),
       notes: e.notes ?? undefined,
-      feedingType: e.type,
+      type: e.type,
     })),
 
     ...pet.medicationEvents.map((e) => ({
@@ -49,6 +50,7 @@ export default function EventList({ pet, onEdit }: Props) {
       eventType: "medication" as const,
       date: e.date.toISOString(),
       notes: e.notes ?? undefined,
+      type: e.type,
     })),
 
     ...pet.changeLines.map((e) => ({
@@ -56,6 +58,13 @@ export default function EventList({ pet, onEdit }: Props) {
       eventType: "change" as const,
       date: e.date.toISOString(),
       changeLabel: e.label,
+    })),
+    ...pet.activityEvents.map((e) => ({
+      id: e.id,
+      eventType: "activity" as const,
+      date: e.date.toISOString(),
+      notes: e.notes ?? undefined,
+      type: e.type,
     })),
   ]
     // newest first
@@ -114,11 +123,7 @@ export default function EventList({ pet, onEdit }: Props) {
                         <div className="flex-1 space-y-1">
                           <div className="flex items-center gap-2 text-sm">
                             <span className="font-medium capitalize">
-                              {event.eventType}
-                              {event.eventType === "feeding" &&
-                              event.feedingType
-                                ? ` (${event.feedingType})`
-                                : ""}
+                              {getEventLabel(event)}
                             </span>
                             <span className="text-gray-400">·</span>
                             <span className="text-gray-500">
@@ -139,12 +144,7 @@ export default function EventList({ pet, onEdit }: Props) {
                           )}
                         </div>
 
-                        <button
-                          onClick={() => onEdit(event)}
-                          className="text-blue-600 hover:underline text-sm shrink-0"
-                        >
-                          Edit
-                        </button>
+                        <EventMenu onEdit={() => onEdit(event)} />
                       </div>
                     </li>
                   );
