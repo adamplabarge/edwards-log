@@ -36,7 +36,7 @@ function TimeSinceLastSeizureBase({ seizures }: Props) {
   const hours = Math.floor(diff.hours % 24);
 
   return (
-    <section className="rounded-lg ">
+    <section className="rounded-lg bg-gray-800/50 p-4 rounded-lg border border-gray-700">
       <div className="flex flex-wrap items-center gap-3">
         <span className="text-sm font-medium text-gray-300">
           Time since last seizure:

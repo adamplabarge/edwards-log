@@ -9,6 +9,7 @@ import { ClipboardIcon } from "@heroicons/react/24/outline";
 import type { PetWithRelations } from "./types/PetWithRelations.type";
 import { TimeSinceLastSeizure } from "./TimeSinceLastSeizure";
 import { SeizureClustersCard } from "./SeizureClusterCard";
+import { SeizureRollingFrequencySection } from "./SeizureRollingFrequencySection";
 
 type PetViewProps = {
   pet: PetWithRelations;
@@ -67,10 +68,11 @@ export function PetView({
         <h1 className="text-3xl font-bold">{pet.name}</h1>
       </section>
 
-      <TimeSinceLastSeizure seizures={pet.seizureEvents} />
       <SeizureClustersCard seizures={pet.seizureEvents} />
-
+      <TimeSinceLastSeizure seizures={pet.seizureEvents} />
+      
       {/* Date filters */}
+      <h3 className="mb-2 text-lg font-semibold">Seizure Timeline Chart</h3>
       <section className="flex flex-wrap gap-4 items-center">
         <label>
           Start:{" "}
@@ -118,7 +120,13 @@ export function PetView({
           />
         </div>
 
-        <h3>Seizure Risk Histograms</h3>
+        <SeizureRollingFrequencySection
+          seizureData={pet.seizureEvents}
+          startDate={startDate}
+          endDate={endDate}
+        />
+
+        <h3 className="mb-1 text-lg font-semibold">Seizure Risk Histograms</h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="min-h-[240px] md:min-h-[250px]">
@@ -150,7 +158,7 @@ export function PetView({
         <section>
           {shareUrl ? (
             <>
-              Share Link:
+              <h3 className="mb-2 text-lg font-semibold">Share Link</h3>
               <div className="mt-2 flex items-center gap-2">
                 <button
                   onClick={() =>

@@ -338,9 +338,7 @@ export default function SeizureScatterChart({
         },
       },
       legend: {
-        labels: {
-          color: textColor,
-        },
+        display: false
       },
       annotation: {
         annotations: annotationObjects,
