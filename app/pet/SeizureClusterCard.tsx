@@ -2,7 +2,7 @@
 
 import { memo } from "react";
 import { DateTime } from "luxon";
-import { useSeizureClusters } from "@/app/pet/useSeizureClusters";
+import { useSeizureClusters } from "@/app/pet/hooks/useSeizureClusters";
 import { SeizureEvent } from "@/prisma/generated/client";
 
 type Props = {

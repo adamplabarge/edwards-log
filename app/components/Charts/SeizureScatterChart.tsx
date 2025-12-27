@@ -22,6 +22,7 @@ import {
 } from "@/prisma/generated/client";
 import { usePrefersDark } from "@/app/hooks/usePrefersDark";
 import { EVENT_COLORS } from "@/app/pet/constants";
+import { useGetLongestSeizureFreeStreak } from "@/app/hooks/useGetLongestSeizureFreeStreak";
 
 ChartJS.register(
   LinearScale,
@@ -51,6 +52,11 @@ export default function SeizureScatterChart({
   activityData,
 }: Props) {
   const prefersDark = usePrefersDark();
+
+  const longestStreak =
+    startDate && endDate
+      ? useGetLongestSeizureFreeStreak(seizureData, startDate, endDate)
+      : null;
 
   const xMin = startDate
     ? DateTime.fromISO(startDate).startOf("day").toJSDate()
@@ -197,6 +203,34 @@ export default function SeizureScatterChart({
     ],
   };
 
+  const longestStreakAnnotation =
+    longestStreak && longestStreak.days > 0
+      ? {
+          longestStreak: {
+            type: "box",
+            xMin: longestStreak.start,
+            xMax: longestStreak.end,
+            backgroundColor: prefersDark
+              ? "rgba(34,197,94,0.15)"
+              : "rgba(34,197,94,0.12)",
+            borderWidth: 0,
+
+            label: {
+              display: true,
+              content: [
+                "Longest seizure-free ",
+                `period (${longestStreak.days} days)`,
+              ],
+              position: "center",
+              color: prefersDark ? "#bbf7d0" : "#166534",
+              font: {
+                weight: "bold",
+              },
+            },
+          },
+        }
+      : {};
+
   const annotationObjects = changeLines.reduce((acc, ev, i) => {
     const date = DateTime.fromISO(ev.date.toISOString()).toJSDate();
 
@@ -341,7 +375,10 @@ export default function SeizureScatterChart({
         display: false
       },
       annotation: {
-        annotations: annotationObjects,
+        annotations: {
+        ...annotationObjects,
+        ...longestStreakAnnotation,
+      } as any,
       },
     },
   };

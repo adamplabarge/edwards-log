@@ -15,10 +15,19 @@ export default function HomePage() {
         </p>
         <div className="max-w-6xl mx-auto flex justify-center">
           <Image
-            src="/images/hero-alt2.png"
+            src="/images/hero-part-1.png"
             alt="Hero"
-            width={891}
-            height={981}
+            width={878}
+            height={1121}
+            className="rounded-lg shadow-lg"
+          />
+        </div>
+        <div className="max-w-6xl mx-auto flex justify-center">
+          <Image
+            src="/images/hero-part-2.png"
+            alt="Hero"
+            width={877}
+            height={715}
             className="rounded-lg shadow-lg"
           />
         </div>
@@ -30,6 +39,59 @@ export default function HomePage() {
             height={910}
             className="rounded-lg shadow-lg"
           />
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="max-w-4xl mx-auto px-4">
+        <h2 className="text-2xl font-bold text-center mb-10">
+          Everything you need to understand seizure patterns
+        </h2>
+
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-8">
+          {/* Charts */}
+          <div className="flex flex-col items-center text-center max-w-[180px]">
+            <div className="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-2xl mb-3">
+              📈
+            </div>
+            <h3 className="font-semibold mb-1">Charts</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Visualize seizure trends and patterns over time.
+            </p>
+          </div>
+
+          {/* Logs */}
+          <div className="flex flex-col items-center text-center max-w-[180px]">
+            <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center text-2xl mb-3">
+              📝
+            </div>
+            <h3 className="font-semibold mb-1">Logs</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Record seizures, notes, and daily observations.
+            </p>
+          </div>
+
+          {/* Event Types */}
+          <div className="flex flex-col items-center text-center max-w-[180px]">
+            <div className="w-16 h-16 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center text-2xl mb-3">
+              🧩
+            </div>
+            <h3 className="font-semibold mb-1">Event Types</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Track medications, feedings, activities, and changes.
+            </p>
+          </div>
+
+          {/* Sharable Link */}
+          <div className="flex flex-col items-center text-center max-w-[180px]">
+            <div className="w-16 h-16 rounded-full bg-orange-100 dark:bg-orange-900 flex items-center justify-center text-2xl mb-3">
+              🔗
+            </div>
+            <h3 className="font-semibold mb-1">Sharable Link</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Share timelines with vets, caregivers, or family.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -45,8 +107,9 @@ export default function HomePage() {
           and charts that highlight patterns and important changes.
         </p>
         <p className="mb-2 w-3/4">
-          Currently optimized for dogs, with more pet types coming soon! Afterall,
-          Edward has two other dog brothers, a void cat brother and a parrot sister.
+          Currently optimized for dogs, with more pet types coming soon!
+          Afterall, Edward has two other dog brothers, a void cat brother and a
+          parrot sister.
         </p>
       </section>
 

@@ -17,7 +17,14 @@ import { DateTime } from "luxon";
 import { SeizureEvent } from "@/prisma/generated/client";
 import { usePrefersDark } from "@/app/hooks/usePrefersDark";
 
-ChartJS.register(LinearScale, PointElement, LineElement, TimeScale, Tooltip, Legend);
+ChartJS.register(
+  LinearScale,
+  PointElement,
+  LineElement,
+  TimeScale,
+  Tooltip,
+  Legend
+);
 
 type Props = {
   seizureData: SeizureEvent[];
@@ -49,7 +56,9 @@ export function SeizureRollingFrequencyChart({
 
     const end = endDate
       ? DateTime.fromISO(endDate).endOf("day")
-      : DateTime.fromISO(sorted[sorted.length - 1].date.toISOString()).endOf("day");
+      : DateTime.fromISO(sorted[sorted.length - 1].date.toISOString()).endOf(
+          "day"
+        );
 
     // Generate each day in range
     const days: DateTime[] = [];
@@ -74,7 +83,9 @@ export function SeizureRollingFrequencyChart({
           label: `Seizures in last ${windowDays} days`,
           data: counts,
           borderColor: prefersDark ? "#ff4d4f" : "#e11d48",
-          backgroundColor: prefersDark ? "rgba(255, 77, 79, 0.3)" : "rgba(241, 19, 68, 0.2)",
+          backgroundColor: prefersDark
+            ? "rgba(255, 77, 79, 0.3)"
+            : "rgba(241, 19, 68, 0.2)",
           tension: 0.2,
         },
       ],
@@ -88,24 +99,43 @@ export function SeizureRollingFrequencyChart({
       x: {
         type: "time",
         time: { unit: "day" },
-        title: { display: true, text: "Date", color: prefersDark ? "#e0e0e0" : "#111" },
+        title: {
+          display: true,
+          text: "Date",
+          color: prefersDark ? "#e0e0e0" : "#111",
+        },
         ticks: { color: prefersDark ? "#e0e0e0" : "#111" },
-        grid: { color: prefersDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" },
+        grid: {
+          color: prefersDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+        },
       },
       y: {
         beginAtZero: true,
-        title: { display: true, text: "Seizures", color: prefersDark ? "#e0e0e0" : "#111" },
+        title: {
+          display: true,
+          text: "Seizures",
+          color: prefersDark ? "#e0e0e0" : "#111",
+        },
         ticks: { color: prefersDark ? "#e0e0e0" : "#111", precision: 0 },
-        grid: { color: prefersDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" },
+        grid: {
+          color: prefersDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+        },
       },
     },
     plugins: {
-      legend: { labels: { color: prefersDark ? "#e0e0e0" : "#111" } },
       tooltip: {
         callbacks: {
-          label: (ctx) => ` ${ctx.parsed.y} seizures`,
+          title: (items) =>
+            items[0].parsed.x
+              ? DateTime.fromJSDate(new Date(items[0].parsed.x)).toFormat("DDD")
+              : "",
+          label: (ctx) =>
+            `${ctx.parsed.y} seizures in the previous ${windowDays} days`,
+          afterLabel: () => "Each point includes seizures from earlier days",
         },
       },
+
+      legend: { labels: { color: prefersDark ? "#e0e0e0" : "#111" } },
     },
   };
 
