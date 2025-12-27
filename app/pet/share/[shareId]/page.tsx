@@ -26,8 +26,6 @@ export default async function PetSharePage({ params }: PageProps) {
         } } },
   });
 
-  console.log("shareId", shareId, share);
-
   if (!share) notFound();
   // if (share.expiresAt && share.expiresAt < new Date()) notFound();
 

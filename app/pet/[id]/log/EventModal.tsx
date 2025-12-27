@@ -13,7 +13,6 @@ type Props = {
 };
 
 export default function EventModal({ petId, event, onClose }: Props) {
-  console.log("EventModal props:", { petId, event });
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [eventType, setEventType] = useState<EventType>(
@@ -27,25 +26,31 @@ export default function EventModal({ petId, event, onClose }: Props) {
           .toFormat("yyyy-MM-dd'T'HH:mm")
       : DateTime.now().toLocal().toFormat("yyyy-MM-dd'T'HH:mm")
   );
+  const [endDate, setEndDate] = useState<string>(
+    event?.endDate
+      ? DateTime.fromISO(event.endDate, { zone: "utc" })
+          .toLocal()
+          .toFormat("yyyy-MM-dd'T'HH:mm")
+      : DateTime.now().toLocal().toFormat("yyyy-MM-dd'T'HH:mm")
+  );
   const [dynamicFields, setDynamicFields] = useState<any>(() => {
     const copy = { ...event };
     delete copy.notes;
     delete copy.eventType;
     delete copy.date;
+    delete copy.endDate;
     delete copy.id;
     return copy;
   });
 
-  console.log("Dynamic fields:", dynamicFields);
-
   async function save() {
     setLoading(true);
 
-    const utcDate = DateTime.fromFormat(
-      date,
-      "yyyy-MM-dd'T'HH:mm",
-      { zone: "local" }
-    ).toUTC().toISO();
+    const utcDate = DateTime.fromFormat(date, "yyyy-MM-dd'T'HH:mm", {
+      zone: "local",
+    })
+      .toUTC()
+      .toISO();
 
     if (utcDate !== null && !DateTime.fromISO(utcDate).isValid) {
       alert("Invalid date");
@@ -60,6 +65,13 @@ export default function EventModal({ petId, event, onClose }: Props) {
         id: event?.id,
         eventType,
         date: utcDate,
+        ...(eventType === "activity" && {
+          endDate: DateTime.fromFormat(endDate, "yyyy-MM-dd'T'HH:mm", {
+            zone: "local",
+          })
+            .toUTC()
+            .toISO(),
+        }),
         notes,
         ...dynamicFields,
       }),
@@ -98,7 +110,11 @@ export default function EventModal({ petId, event, onClose }: Props) {
         )}
 
         {/* Dynamic form */}
-        <EventForm eventType={eventType} value={dynamicFields} onChange={setDynamicFields} />
+        <EventForm
+          eventType={eventType}
+          value={dynamicFields}
+          onChange={setDynamicFields}
+        />
 
         {/* Date */}
         <div className="space-y-1">
@@ -112,6 +128,20 @@ export default function EventModal({ petId, event, onClose }: Props) {
             className="w-full border rounded p-2 bg-white text-black dark:bg-gray-900 dark:text-white dark:[color-scheme:dark]"
           />
         </div>
+
+        {eventType === "activity" && (
+          <div className="space-y-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              End date & time
+            </label>
+            <input
+              type="datetime-local"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              className="w-full border rounded p-2 bg-white text-black dark:bg-gray-900 dark:text-white dark:[color-scheme:dark]"
+            />
+          </div>
+        )}
 
         {/* Notes */}
         <textarea

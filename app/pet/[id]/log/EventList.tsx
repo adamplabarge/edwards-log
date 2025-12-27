@@ -3,7 +3,7 @@ import { UnifiedEvent } from "@/app/pet/types/UnifiedEvent.type";
 import { DateTime } from "luxon";
 import { useState } from "react";
 import EventFilters from "./EventFilters";
-import { getEventColor, getEventLabel, isSameDay } from "./utils";
+import { formatDuration, getEventColor, getEventLabel, isSameDay } from "./utils";
 import { EVENT_COLORS } from "@/app/pet/constants";
 import { EventMenu } from "./EventMenu";
 
@@ -63,6 +63,7 @@ export default function EventList({ pet, onEdit }: Props) {
       id: e.id,
       eventType: "activity" as const,
       date: e.date.toISOString(),
+      endDate: e.endDate.toISOString(),
       notes: e.notes ?? undefined,
       type: e.type,
     })),
@@ -127,9 +128,11 @@ export default function EventList({ pet, onEdit }: Props) {
                             </span>
                             <span className="text-gray-400">·</span>
                             <span className="text-gray-500">
-                              {DateTime.fromJSDate(
-                                new Date(event.date)
-                              ).toLocaleString(DateTime.DATETIME_MED)}
+                              {event.eventType === "activity" && "endDate" in event && event.endDate
+                                ? `${DateTime.fromISO(event.date).toLocaleString(
+                                    DateTime.DATETIME_MED
+                                  )} (${formatDuration(event.date, event.endDate as string)})`
+                                : DateTime.fromISO(event.date).toLocaleString(DateTime.DATETIME_MED)}
                             </span>
                           </div>
 

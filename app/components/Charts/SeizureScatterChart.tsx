@@ -109,21 +109,24 @@ export default function SeizureScatterChart({
     };
   });
 
-  const activityPoints = activityData
-    ? activityData.map((a) => {
-        const dt = DateTime.fromISO(a.date.toISOString());
+  const activityLineSegments = activityData
+  ? activityData.map((a) => {
+      const start = DateTime.fromISO(a.date.toISOString());
+      const end = DateTime.fromISO(a.endDate.toISOString());
 
-        // Convert to fractional hours for Y axis
-        const hourFraction = dt.hour + dt.minute / 60;
+      const hourStart = start.hour + start.minute / 60;
+      const hourEnd = end.hour + end.minute / 60;
 
-        return {
-          x: dt.toJSDate(),
-          y: hourFraction,
-          notes: a.notes ?? null,
-          type: a.type,
-        };
-      })
-    : [];
+      return {
+        x: start.toJSDate(),
+        x2: end.toJSDate(), // we'll need this for custom rendering
+        y: hourStart,
+        y2: hourEnd, // we'll need this for custom rendering
+        type: a.type,
+        notes: a.notes ?? null,
+      };
+    })
+  : [];
 
   const textColor = prefersDark ? "#e0e0e0" : "#111";
   const gridColor = prefersDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.15)";
@@ -146,14 +149,14 @@ export default function SeizureScatterChart({
   };
 
   // Group activity points by type
-  const activityPointsByType: Record<string, typeof activityPoints> = {
-    walk: activityPoints.filter((a) => (a as any).type === "walk"),
-    playtime: activityPoints.filter((a) => (a as any).type === "playtime"),
-    park: activityPoints.filter((a) => (a as any).type === "park"),
-    training: activityPoints.filter((a) => (a as any).type === "training"),
-    grooming: activityPoints.filter((a) => (a as any).type === "grooming"),
-    vet_visit: activityPoints.filter((a) => (a as any).type === "vet_visit"),
-    other: activityPoints.filter((a) => (a as any).type === "other"),
+  const activityPointsByType: Record<string, typeof activityLineSegments> = {
+    walk: activityLineSegments.filter((a) => (a as any).type === "walk"),
+    playtime: activityLineSegments.filter((a) => (a as any).type === "playtime"),
+    park: activityLineSegments.filter((a) => (a as any).type === "park"),
+    training: activityLineSegments.filter((a) => (a as any).type === "training"),
+    grooming: activityLineSegments.filter((a) => (a as any).type === "grooming"),
+    vet_visit: activityLineSegments.filter((a) => (a as any).type === "vet_visit"),
+    other: activityLineSegments.filter((a) => (a as any).type === "other"),
   };
 
   // Build datasets dynamically
@@ -202,6 +205,24 @@ export default function SeizureScatterChart({
       })),
     ],
   };
+
+  const activityAnnotations = activityLineSegments.reduce((acc, a, i) => {
+    acc[`activity${i}`] = {
+      type: 'line',
+      xMin: a.x,
+      xMax: a.x2,
+      yMin: a.y,
+      yMax: a.y2,
+      borderColor:
+        EVENT_COLORS[`activity:${a.type}` as keyof typeof EVENT_COLORS] ?? 'blue',
+      borderWidth: 4,
+      borderRadius: 2,
+      label: {
+        display: false
+      },
+    };
+    return acc;
+  }, {} as Record<string, any>);
 
   const longestStreakAnnotation =
     longestStreak && longestStreak.days > 0
@@ -378,6 +399,7 @@ export default function SeizureScatterChart({
         annotations: {
         ...annotationObjects,
         ...longestStreakAnnotation,
+        ...activityAnnotations
       } as any,
       },
     },

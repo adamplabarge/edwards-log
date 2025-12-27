@@ -39,3 +39,18 @@ export function getEventLabel(event: UnifiedEvent) {
       return event.eventType;
   }
 }
+
+export function formatDuration(start: string, end: string) {
+  const startDT = DateTime.fromISO(start);
+  const endDT = DateTime.fromISO(end);
+
+  const diff = endDT.diff(startDT, ["hours", "minutes"]);
+  const hours = Math.floor(diff.hours);
+  const minutes = diff.minutes;
+
+  const parts = [];
+  if (hours) parts.push(`${hours}h`);
+  if (minutes) parts.push(`${Math.round(minutes)}m`);
+
+  return parts.join(" ") || "0m";
+}
