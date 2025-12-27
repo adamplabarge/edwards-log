@@ -11,6 +11,8 @@ import { TimeSinceLastSeizure } from "./TimeSinceLastSeizure";
 import { SeizureClustersCard } from "./SeizureClusterCard";
 import { SeizureRollingFrequencySection } from "./SeizureRollingFrequencySection";
 import { LongestSeizureFreeStreak } from "./LongSeizureFreeStreak";
+import { SeizureTimeOfDayPieChart } from "@/app/components/Charts/SeizureTimeOfDayPieChart";
+import { SeizureTimeOfDayTrendChart } from "@/app/components/Charts/SeizuresTimeOfDayTrendChart";
 
 type PetViewProps = {
   pet: PetWithRelations;
@@ -118,6 +120,22 @@ export function PetView({
             feedingData={pet.feedingEvents}
             changeLines={pet.changeLines}
             activityData={pet.activityEvents}
+          />
+        </div>
+
+        <h3 className="mb-2 text-lg font-semibold">Seizure Time-of-Day Trend</h3>
+        <div className="w-full overflow-x-auto">
+          <SeizureTimeOfDayPieChart
+            seizureData={pet.seizureEvents}
+            startDate={startDate}
+            endDate={endDate}
+          />
+        </div>
+        <div className="w-full overflow-x-auto">
+          <SeizureTimeOfDayTrendChart
+            seizureData={pet.seizureEvents}
+            startDate={startDate}
+            endDate={endDate}
           />
         </div>
 
