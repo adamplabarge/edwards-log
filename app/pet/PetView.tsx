@@ -8,6 +8,7 @@ import Link from "next/link";
 import { ClipboardIcon } from "@heroicons/react/24/outline";
 import type { PetWithRelations } from "./types/PetWithRelations.type";
 import { TimeSinceLastSeizure } from "./TimeSinceLastSeizure";
+import { SeizureClustersCard } from "./SeizureClusterCard";
 
 type PetViewProps = {
   pet: PetWithRelations;
@@ -67,6 +68,7 @@ export function PetView({
       </section>
 
       <TimeSinceLastSeizure seizures={pet.seizureEvents} />
+      <SeizureClustersCard seizures={pet.seizureEvents} />
 
       {/* Date filters */}
       <section className="flex flex-wrap gap-4 items-center">
