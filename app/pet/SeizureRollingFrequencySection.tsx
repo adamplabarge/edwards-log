@@ -16,7 +16,7 @@ function SeizureRollingFrequencySectionBase({ seizureData, startDate, endDate }:
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col items-start mb-4">
         <h3 className="text-lg font-semibold">Seizure Rolling Frequency</h3>
         <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
           <span>How to read this chart</span>
@@ -30,9 +30,9 @@ function SeizureRollingFrequencySectionBase({ seizureData, startDate, endDate }:
           <button
             key={days}
             onClick={() => setWindowDays(days)}
-            className={`px-2 py-1 rounded border ${
+            className={`px-2 py-1 rounded ${
               windowDays === days
-                ? "bg-blue-600 text-white border-blue-600"
+                ? "bg-blue-600 text-white hover:bg-blue-800"
                 : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-700"
             }`}
           >

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo } from "react";
+import { memo } from "react";
 import { DateTime } from "luxon";
 
 type SeizureLike = {
@@ -36,19 +36,19 @@ function TimeSinceLastSeizureBase({ seizures }: Props) {
   const hours = Math.floor(diff.hours % 24);
 
   return (
-    <section className="rounded-lg bg-gray-800/50 p-4 rounded-lg border border-gray-700">
+    <section className="mb-10 border-b-1 border-t-1 border-gray-900 py-4 px-2">
       <div className="flex flex-wrap items-center gap-3">
-        <span className="text-sm font-medium text-gray-300">
+        <span className="text-md font-medium text-gray-300">
           Time since last seizure:
         </span>
 
-        <span className="text-sm font-semibold">
+        <span className="text-md font-semibold">
           {days} day{days !== 1 ? "s" : ""},{" "}
           {hours} hour{hours !== 1 ? "s" : ""}
         </span>
       </div>
 
-      <div className="mt-1 text-sm">
+      <div className="mt-1 text-md">
         <span className="text-gray-300">Last seizure:</span> {lastDt.toLocaleString(DateTime.DATETIME_MED)}
       </div>
     </section>

@@ -10,6 +10,7 @@ import type { PetWithRelations } from "./types/PetWithRelations.type";
 import { TimeSinceLastSeizure } from "./TimeSinceLastSeizure";
 import { SeizureClustersCard } from "./SeizureClusterCard";
 import { SeizureRollingFrequencySection } from "./SeizureRollingFrequencySection";
+import { LongestSeizureFreeStreak } from "./LongSeizureFreeStreak";
 
 type PetViewProps = {
   pet: PetWithRelations;
@@ -119,6 +120,12 @@ export function PetView({
             activityData={pet.activityEvents}
           />
         </div>
+
+        <LongestSeizureFreeStreak
+          seizureData={pet.seizureEvents}
+          startDate={startDate}
+          endDate={endDate}
+        />
 
         <SeizureRollingFrequencySection
           seizureData={pet.seizureEvents}

@@ -11,7 +11,11 @@ type DashboardViewProps = {
   onCreatePet: (formData: FormData) => void;
 };
 
-export function DashboardView({ pets, userId, onCreatePet }: DashboardViewProps) {
+export function DashboardView({
+  pets,
+  userId,
+  onCreatePet,
+}: DashboardViewProps) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -19,10 +23,10 @@ export function DashboardView({ pets, userId, onCreatePet }: DashboardViewProps)
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Your Pets</h1>
         <button
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="bg-blue-600 hover:bg-blue-800 text-white px-4 py-2 rounded"
           onClick={() => setShowModal(true)}
         >
-          + Create Pet
+          Create Pet
         </button>
       </div>
 
@@ -35,20 +39,28 @@ export function DashboardView({ pets, userId, onCreatePet }: DashboardViewProps)
               key={pet.id}
               className="border rounded p-3 flex items-center justify-between gap-4"
             >
-              <Link href={`/pet/${pet.id}`} className="flex-1 hover:underline">
+              <span>
                 <h2 className="font-semibold">
                   {pet.name} ({pet.type})
                 </h2>
                 {pet.notes && (
                   <p className="text-sm text-gray-600">{pet.notes}</p>
                 )}
-              </Link>
-              <Link
-                href={`/pet/${pet.id}/log`}
-                className="text-sm px-3 py-1 border rounded bg-yellow-900 hover:bg-yellow-800 whitespace-nowrap"
-              >
-                Log Event
-              </Link>
+              </span>
+              <span className="flex gap-2">
+                <Link
+                  href={`/pet/${pet.id}`}
+                  className="text-sm px-3 py-1 rounded bg-blue-600 hover:bg-blue-800 whitespace-nowrap"
+                >
+                  Charts
+                </Link>
+                <Link
+                  href={`/pet/${pet.id}/log`}
+                  className="text-sm px-3 py-1 rounded bg-blue-600 hover:bg-blue-800 whitespace-nowrap"
+                >
+                  Log Event
+                </Link>
+              </span>
             </li>
           ))}
         </ul>
