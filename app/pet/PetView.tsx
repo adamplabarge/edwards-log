@@ -7,6 +7,7 @@ import SeizureRiskHistogram from "@/app/components/Charts/SeirzuresRiskHistogram
 import Link from "next/link";
 import { ClipboardIcon } from "@heroicons/react/24/outline";
 import type { PetWithRelations } from "./types/PetWithRelations.type";
+import { TimeSinceLastSeizure } from "./TimeSinceLastSeizure";
 
 type PetViewProps = {
   pet: PetWithRelations;
@@ -64,6 +65,8 @@ export function PetView({
       <section className="space-y-2">
         <h1 className="text-3xl font-bold">{pet.name}</h1>
       </section>
+
+      <TimeSinceLastSeizure seizures={pet.seizureEvents} />
 
       {/* Date filters */}
       <section className="flex flex-wrap gap-4 items-center">
