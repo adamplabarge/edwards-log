@@ -1,6 +1,8 @@
 # Edward's Log
 
-This is a site to track dog (and other pet) seizures and events. I made this to track my own dogs seizures. It is also a demo site for how to get a NextJS app with Auth0 and Prisma Postgres database working on Vercel hosting. 
+This is a site to track pet seizures and events. I made this to track my own dogs seizures. It is also a demo site for how to get a NextJS app with Auth0 and Prisma Postgres database working on Vercel hosting and to explore ChartJS more. 
+
+[Visit Site](https://edwardslog.com/)
 
 ### Features
 - Protected Routes
