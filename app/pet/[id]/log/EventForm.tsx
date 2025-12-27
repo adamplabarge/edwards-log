@@ -15,8 +15,8 @@ export default function EventForm({ eventType, value, onChange }: Props) {
           className="w-full border rounded p-2 bg-white text-black dark:bg-gray-900 dark:text-white dark:[color-scheme:dark]"
         >
           <option value="" disabled hidden>Select a medication type</option>
-          <option value="asm">Antiseizure (ASM & AEM)</option>
-          <option value="other">Other</option>
+          <option value="ASM">Antiseizure (ASM & AEM)</option>
+          <option value="OTHER">Other</option>
         </select>
       );
     case "feeding":
