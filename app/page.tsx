@@ -13,32 +13,63 @@ export default function HomePage() {
         <p className="mt-12 mb-16 font-semibold text-2xl">
           Charts and logs to help you monitor your pet's activies and seizures
         </p>
-        <div className="max-w-6xl mx-auto flex justify-center">
-          <Image
-            src="/images/hero-part-1.png"
-            alt="Hero"
-            width={878}
-            height={1121}
-            className="rounded-lg shadow-lg"
-          />
+        <div className="block dark:hidden">
+          <div className="max-w-6xl mx-auto flex justify-center">
+            <Image
+              src="/images/hero-part-1-lt.png"
+              alt="Hero"
+              width={870}
+              height={1065}
+              className="rounded-lg shadow-lg"
+            />
+          </div>
+          <div className="max-w-6xl mx-auto flex justify-center">
+            <Image
+              src="/images/hero-part-2-lt.png"
+              alt="Hero"
+              width={867}
+              height={704}
+              className="rounded-lg shadow-lg"
+            />
+          </div>
+          <div className="max-w-6xl mx-auto flex justify-center mt-12">
+            <Image
+              src="/images/event-logs-lt.png"
+              alt="log"
+              width={650}
+              height={1044}
+              className="rounded-lg shadow-lg"
+            />
+          </div>
         </div>
-        <div className="max-w-6xl mx-auto flex justify-center">
-          <Image
-            src="/images/hero-part-2.png"
-            alt="Hero"
-            width={877}
-            height={715}
-            className="rounded-lg shadow-lg"
-          />
-        </div>
-        <div className="max-w-6xl mx-auto flex justify-center mt-12">
-          <Image
-            src="/images/event-logs.png"
-            alt="log"
-            width={657}
-            height={910}
-            className="rounded-lg shadow-lg"
-          />
+        <div className="hidden dark:block">
+          <div className="max-w-6xl mx-auto flex justify-center">
+            <Image
+              src="/images/hero-part-1.png"
+              alt="Hero"
+              width={878}
+              height={1121}
+              className="rounded-lg shadow-lg"
+            />
+          </div>
+          <div className="max-w-6xl mx-auto flex justify-center">
+            <Image
+              src="/images/hero-part-2.png"
+              alt="Hero"
+              width={877}
+              height={715}
+              className="rounded-lg shadow-lg"
+            />
+          </div>
+          <div className="max-w-6xl mx-auto flex justify-center mt-12">
+            <Image
+              src="/images/event-logs.png"
+              alt="log"
+              width={657}
+              height={910}
+              className="rounded-lg shadow-lg"
+            />
+          </div>
         </div>
       </section>
 
