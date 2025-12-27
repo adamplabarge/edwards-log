@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { DateTime } from "luxon";
 import { useSeizureClusters } from "@/app/pet/useSeizureClusters";
 import { SeizureEvent } from "@/prisma/generated/client";
@@ -8,7 +9,7 @@ type Props = {
   seizures: SeizureEvent[];
 };
 
-export function SeizureClustersCard({ seizures }: Props) {
+export function SeizureClustersCardBase({ seizures }: Props) {
   const seizureConvertTime = seizures.map((seizure) => ({
     ...seizure,
     date: seizure.date.toISOString(),
@@ -50,3 +51,5 @@ export function SeizureClustersCard({ seizures }: Props) {
     </>
   );
 }
+
+export const SeizureClustersCard = memo(SeizureClustersCardBase);
