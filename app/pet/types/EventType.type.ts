@@ -1,1 +1,1 @@
-export type EventType = "seizure" | "feeding" | "medication" | "change";
+export type EventType = "seizure" | "feeding" | "medication" | "change" | "activity";

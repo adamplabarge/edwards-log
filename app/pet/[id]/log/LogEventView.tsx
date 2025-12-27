@@ -13,6 +13,7 @@ type LogEventViewProps = {
 export default function LogEventView({ pet }: LogEventViewProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [editingEvent, setEditingEvent] = useState<any | null>(null);
+  console.log("Editing event:", editingEvent);
 
   return (
     <main className="max-w-2xl mx-auto p-6 space-y-6">

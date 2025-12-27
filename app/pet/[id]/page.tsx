@@ -33,6 +33,7 @@ export default async function PetPage(props: PageProps) {
       medicationEvents: true,
       changeLines: true,
       shareLinks: true,
+      activityEvents: true,
     },
   });
 

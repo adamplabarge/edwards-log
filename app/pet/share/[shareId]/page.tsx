@@ -12,8 +12,18 @@ export default async function PetSharePage({ params }: PageProps) {
   const { shareId } = await params;
 
   const share = await prisma.petShareLink.findUnique({
-    where: { id: shareId },
-    include: { pet: { include: { seizureEvents: true, feedingEvents: true, medicationEvents: true, changeLines: true } } },
+    where: { 
+      id: shareId
+    },
+    include: { 
+      pet: { 
+        include: { 
+          seizureEvents: true,
+          feedingEvents: true,
+          medicationEvents: true,
+          changeLines: true,
+          activityEvents: true
+        } } },
   });
 
   console.log("shareId", shareId, share);

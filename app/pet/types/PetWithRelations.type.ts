@@ -4,6 +4,7 @@ import {
   FeedingEvent,
   MedicationEvent,
   ChangeLine,
+  ActivityEvent,
 } from "@/prisma/generated/client";
 
 export type PetWithRelations = {
@@ -11,4 +12,5 @@ export type PetWithRelations = {
   feedingEvents: FeedingEvent[];
   medicationEvents: MedicationEvent[];
   changeLines: ChangeLine[];
+  activityEvents: ActivityEvent[];
 } & Pet;

@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 
-type EventType = "seizure" | "feeding" | "medication" | "change";
+type EventType = "seizure" | "feeding" | "medication" | "change" | "activity";
+type MedicationType = "ASM" | "OTHER";
 
 /*
   Handles creating and updating pet events.
@@ -50,7 +51,10 @@ export async function POST(
 
     case "feeding":
       if (!type) {
-        return NextResponse.json({ error: "Feeding type required" }, { status: 400 });
+        return NextResponse.json(
+          { error: "Feeding type required" },
+          { status: 400 }
+        );
       }
       await prisma.feedingEvent.create({
         data: {
@@ -63,10 +67,17 @@ export async function POST(
       break;
 
     case "medication":
+      if (!type || !["ASM", "OTHER"].includes(type)) {
+        return NextResponse.json(
+          { error: "Medication type required and must be ASM or OTHER" },
+          { status: 400 }
+        );
+      }
       await prisma.medicationEvent.create({
         data: {
           pet: { connect: { id: petId } },
           date: eventDate,
+          type: type as MedicationType,
           notes,
         },
       });
@@ -74,7 +85,10 @@ export async function POST(
 
     case "change":
       if (!label) {
-        return NextResponse.json({ error: "Change label required" }, { status: 400 });
+        return NextResponse.json(
+          { error: "Change label required" },
+          { status: 400 }
+        );
       }
       await prisma.changeLine.create({
         data: {
@@ -85,8 +99,28 @@ export async function POST(
       });
       break;
 
+    case "activity":
+      if (!type) {
+        return NextResponse.json(
+          { error: "Activity type required" },
+          { status: 400 }
+        );
+      }
+      await prisma.activityEvent.create({
+        data: {
+          pet: { connect: { id: petId } },
+          date: eventDate,
+          type,
+          notes,
+        },
+      });
+      break;
+
     default:
-      return NextResponse.json({ error: "Invalid event type" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Invalid event type" },
+        { status: 400 }
+      );
   }
 
   return NextResponse.json({ success: true });
@@ -135,7 +169,7 @@ export async function PUT(
       await prisma.seizureEvent.update({
         where: {
           id,
-          petId, // 🔒 ownership safety
+          petId,
         },
         data: {
           ...(eventDate && { date: eventDate }),
@@ -159,13 +193,19 @@ export async function PUT(
         },
         data: {
           ...(eventDate && { date: eventDate }),
-          type,
+          type: type as MedicationType,
           notes,
         },
       });
       break;
 
     case "medication":
+      if (!type || !["ASM", "OTHER"].includes(type)) {
+        return NextResponse.json(
+          { error: "Medication type required and must be ASM or OTHER" },
+          { status: 400 }
+        );
+      }
       await prisma.medicationEvent.update({
         where: {
           id,
@@ -173,6 +213,7 @@ export async function PUT(
         },
         data: {
           ...(eventDate && { date: eventDate }),
+          type: type as MedicationType,
           notes,
         },
       });
@@ -198,8 +239,31 @@ export async function PUT(
       });
       break;
 
+    case "activity":
+      if (!type) {
+        return NextResponse.json(
+          { error: "Activity type required" },
+          { status: 400 }
+        );
+      }
+      await prisma.activityEvent.update({
+        where: {
+          id,
+          petId,
+        },
+        data: {
+          ...(eventDate && { date: eventDate }),
+          type,
+          notes,
+        },
+      });
+      break;
+
     default:
-      return NextResponse.json({ error: "Invalid event type" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Invalid event type" },
+        { status: 400 }
+      );
   }
 
   return NextResponse.json({ success: true });

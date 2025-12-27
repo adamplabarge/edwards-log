@@ -26,6 +26,7 @@ export default async function LogEventPage({ params }: Props) {
       medicationEvents: true,
       changeLines: true,
       shareLinks: true,
+      activityEvents: true,
     },
   });
 

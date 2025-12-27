@@ -2,7 +2,8 @@ export type UnifiedEventType =
   | "seizure"
   | "feeding"
   | "medication"
-  | "change";
+  | "change"
+  | "activity";
 
 export type UnifiedEvent = {
   id: string;
@@ -10,6 +11,7 @@ export type UnifiedEvent = {
   date: string; // ISO 8601, UTC (e.g. "2025-12-04T13:00:00Z")
   notes?: string;
 
-  feedingType?: string;
+  type?: string;
+  medicationType?: string;
   changeLabel?: string;
 };
