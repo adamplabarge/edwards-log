@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <div className="space-y-20">
       {/* Hero Section */}
-      <section className="text-center py-16">
+      <section className="text-center pt-16">
         <h1 className="text-4xl font-bold mb-4 font-semibold">
           A Way To Track Pet Seizures
         </h1>
@@ -235,7 +235,7 @@ export default function HomePage() {
       </section>
 
       {/* Under Construction Section */}
-      <section className="max-w-4xl mx-auto px-4 py-16 rounded-lg">
+      <section className="max-w-4xl mx-auto px-4 mb-16 rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">Under Construction</h2>
         <p className="mb-2">
           Edward’s Log is constantly evolving, and new features are on the
