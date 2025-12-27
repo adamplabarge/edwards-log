@@ -16,37 +16,37 @@ export default function HomePage() {
         <div className="block dark:hidden">
           <div className="max-w-6xl mx-auto flex justify-center mb-4">
             <Image
-              src="/images/hero-part-1-lt.png"
+              src="/images/hero-1-alt2-lt.png"
               alt="Hero"
-              width={870}
-              height={1065}
+              width={873}
+              height={965}
               className="rounded-lg shadow-lg"
             />
           </div>
           <div className="max-w-6xl mx-auto flex justify-center mb-4">
             <Image
-              src="/images/hero-part-3-lt.png"
+              src="/images/hero-2-alt-lt.png"
               alt="Hero"
-              width={877}
-              height={610}
+              width={880}
+              height={759}
               className="rounded-lg shadow-lg"
             />
           </div>
           <div className="max-w-6xl mx-auto flex justify-center mb-4">
             <Image
-              src="/images/hero-part-2-lt.png"
+              src="/images/hero-3-alt-lt.png"
               alt="Hero"
-              width={867}
-              height={704}
+              width={875}
+              height={716}
               className="rounded-lg shadow-lg"
             />
           </div>
           <div className="max-w-6xl mx-auto flex justify-center mt-12">
             <Image
-              src="/images/event-logs-lt.png"
+              src="/images/log-alt-lt.png"
               alt="log"
-              width={650}
-              height={1044}
+              width={645}
+              height={1178}
               className="rounded-lg shadow-lg"
             />
           </div>
@@ -54,37 +54,37 @@ export default function HomePage() {
         <div className="hidden dark:block">
           <div className="max-w-6xl mx-auto flex justify-center mb-4">
             <Image
-              src="/images/hero-part-1.png"
+              src="/images/hero-1-dk.png"
               alt="Hero"
-              width={878}
-              height={1121}
+              width={883}
+              height={980}
               className="rounded-lg shadow-lg"
             />
           </div>
           <div className="max-w-6xl mx-auto flex justify-center mb-4">
             <Image
-              src="/images/hero-part-3.png"
+              src="/images/hero-2-dk.png"
               alt="Hero"
-              width={877}
-              height={606}
+              width={892}
+              height={762}
               className="rounded-lg shadow-lg"
             />
           </div>
           <div className="max-w-6xl mx-auto flex justify-center mb-4">
             <Image
-              src="/images/hero-part-2.png"
+              src="/images/hero-3-dk.png"
               alt="Hero"
-              width={877}
-              height={715}
+              width={872}
+              height={729}
               className="rounded-lg shadow-lg"
             />
           </div>
           <div className="max-w-6xl mx-auto flex justify-center mt-12">
             <Image
-              src="/images/event-logs.png"
+              src="/images/log-dk.png"
               alt="log"
-              width={657}
-              height={910}
+              width={661}
+              height={1187}
               className="rounded-lg shadow-lg"
             />
           </div>
@@ -94,7 +94,7 @@ export default function HomePage() {
       {/* Features */}
       <section className="max-w-4xl mx-auto px-4">
         <h2 className="text-2xl font-bold text-center mb-10">
-          Everything you need to understand seizure patterns
+          Everything you need to for analysis of seizure patterns
         </h2>
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-8">
@@ -116,7 +116,7 @@ export default function HomePage() {
             </div>
             <h3 className="font-semibold mb-1">Logs</h3>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              Record seizures, notes, and daily observations.
+              Record seizures, notes, daily observations and activity times.
             </p>
           </div>
 
@@ -145,25 +145,70 @@ export default function HomePage() {
       </section>
 
       {/* Site Info Section */}
-      <section className="max-w-4xl mx-auto px-4">
-        <h2 className="text-2xl font-semibold mb-4">How it works</h2>
-        <p className="mb-2 w-3/4">
-          Create your free account and add your furry friend. Effortlessly log
-          feedings, medications, and health events, all in one place.
-        </p>
-        <p className="mb-2 w-3/4">
-          See your pet's health at a glance with easy-to-read visual timelines
-          and charts that highlight patterns and important changes.
-        </p>
-        <p className="mb-2 w-3/4">
-          Currently optimized for dogs, with more pet types coming soon!
-          Afterall, Edward has two other dog brothers, a void cat brother and a
-          parrot sister.
-        </p>
+      <section className="max-w-4xl mx-auto px-4 flex flex-col md:flex-row gap-8">
+        {/* Left side: Features */}
+        <div className="md:w-1/2 flex flex-col gap-4">
+          <h2 className="text-2xl font-semibold mb-4">How it works</h2>
+          <p>
+            Create your free account and add your furry friend. Effortlessly log
+            feedings, medications, and health events, all in one place.
+          </p>
+          <p>
+            See your pet's health at a glance with easy-to-read visual timelines
+            and charts that highlight patterns and important changes.
+          </p>
+          <p>
+            Currently optimized for dogs, with more pet types coming soon! After
+            all, Edward has two other dog brothers, a void cat brother, and a
+            parrot sister.
+          </p>
+        </div>
+
+        {/* Right side: How it works */}
+        <div className="md:w-1/2 flex flex-col gap-4">
+          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+            Features
+          </h2>
+          <ul className="space-y-3 text-gray-700 dark:text-gray-300">
+            <li className="flex items-center gap-2">
+              <span className="inline-block w-6 text-center">🩺</span>
+              Track medication schedules with ease
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="inline-block w-6 text-center">⚡</span>
+              Log seizure events quickly and accurately
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="inline-block w-6 text-center">🍽</span>
+              Record feeding times effortlessly
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="inline-block w-6 text-center">🏃</span>
+              Monitor activity durations and trends
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="inline-block w-6 text-center">📊</span>
+              Interactive timeline charts
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="inline-block w-6 text-center">📈</span>
+              Rolling seizure trend visualizations
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="inline-block w-6 text-center">📉</span>
+              Seizure risk histograms
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="inline-block w-6 text-center">⏱</span>
+              Analyze seizure time patterns
+            </li>
+          </ul>
+        </div>
+        
       </section>
 
       {/* About Section */}
-      <section className="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
+      <section className="max-w-4xl mx-auto px-4 flex flex-col md:flex-row gap-8">
         <div className="flex-1">
           <Image
             src="/images/edward.jpg"

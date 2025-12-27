@@ -75,6 +75,7 @@ model ActivityEvent {
   petId     String
   pet       Pet      @relation(fields: [petId], references: [id])
   date      DateTime
+  endDate   DateTime @default(now())
   type      String
   notes     String?
   createdAt DateTime @default(now())

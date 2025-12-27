@@ -5,7 +5,6 @@ type Props = {
 };
 
 export default function EventForm({ eventType, value, onChange }: Props) {
-  console.log("Rendering EventForm with:", { eventType, value });
   switch (eventType) {
     case "medication":
       return (

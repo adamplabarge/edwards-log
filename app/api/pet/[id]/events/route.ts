@@ -28,15 +28,17 @@ export async function POST(
   }
 
   const body = await req.json();
-  const { eventType, notes, type, label, date } = body as {
+  const { eventType, notes, type, label, date, endDate } = body as {
     eventType: EventType;
     notes?: string;
     type?: string;
     label?: string;
     date?: string;
+    endDate?: string;
   };
 
   const eventDate = date ? new Date(date) : new Date();
+  const eventEndDate = endDate ? new Date(endDate) : new Date();
 
   switch (eventType) {
     case "seizure":
@@ -110,6 +112,7 @@ export async function POST(
         data: {
           pet: { connect: { id: petId } },
           date: eventDate,
+          endDate: eventEndDate,
           type,
           notes,
         },
@@ -149,13 +152,14 @@ export async function PUT(
   }
 
   const body = await req.json();
-  const { id, eventType, notes, type, label, date } = body as {
+  const { id, eventType, notes, type, label, date, endDate } = body as {
     id?: string;
     eventType: EventType;
     notes?: string;
     type?: string;
     label?: string;
     date?: string;
+    endDate?: string;
   };
 
   if (!id) {
@@ -163,6 +167,7 @@ export async function PUT(
   }
 
   const eventDate = date ? new Date(date) : undefined;
+  const eventEndDate = endDate ? new Date(endDate) : undefined;
 
   switch (eventType) {
     case "seizure":
@@ -253,6 +258,7 @@ export async function PUT(
         },
         data: {
           ...(eventDate && { date: eventDate }),
+          ...(eventEndDate && { endDate: eventEndDate }),
           type,
           notes,
         },
