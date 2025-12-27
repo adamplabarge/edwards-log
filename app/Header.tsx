@@ -12,15 +12,12 @@ export default function Header() {
   return (
     <header className="flex items-center justify-between p-4 shadow-md">
       {/* Left: Site name + Dashboard link */}
-      <div className="flex items-center space-x-4 text-xl font-bold">
+      <div className="flex items-center space-x-2 md:space-x-4 text-xl font-bold">
         <Link href="/">Edward's Log</Link>
         {user && (
           <>
             <span>|</span>
-            <Link
-              href="/dashboard"
-              className="font-normal"
-            >
+            <Link href="/dashboard" className="font-normal">
               Dashboard
             </Link>
           </>
