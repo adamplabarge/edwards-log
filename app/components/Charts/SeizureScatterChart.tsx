@@ -204,7 +204,7 @@ export default function SeizureScatterChart({
       type: "line",
       xMin: date,
       xMax: date,
-      borderColor: "rgba(255, 99, 132, 0.7)",
+      borderColor: EVENT_COLORS.change,
       borderWidth: 2,
       borderDash: [4, 4],
 
