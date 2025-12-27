@@ -352,24 +352,28 @@ export default function SeizureScatterChart({
     new Array(data.datasets.length).fill(true)
   );
 
-  const legendItems = data.datasets.map((ds, index) => ({
-    index,
-    label: ds.label,
-    group: (() => {
-      if (ds.label === "Seizures") return "Seizures";
-      if (ds.label.includes("Medication")) return "Medications";
-      if (ds.label.includes("Feedings")) return "Feedings";
-      return "Activities";
-    })(),
-    color:
-      typeof ds.backgroundColor === "string"
-        ? ds.backgroundColor
-        : Array.isArray(ds.backgroundColor)
-        ? ds.backgroundColor[0]
-        : "#999",
-    pointRadius: typeof ds.pointRadius === "number" ? ds.pointRadius : 4,
-    visible: visibleDatasets[index],
-  }));
+  const legendItems = data.datasets
+    .map((ds, index) => ({
+      index,
+      label: ds.label,
+      group: (() => {
+        if (ds.label === "Seizures") return "Seizures";
+        if (ds.label.includes("Medication")) return "Medications";
+        if (ds.label.includes("Feedings")) return "Feedings";
+        return "Activities";
+      })(),
+      color:
+        typeof ds.backgroundColor === "string"
+          ? ds.backgroundColor
+          : Array.isArray(ds.backgroundColor)
+          ? ds.backgroundColor[0]
+          : "#999",
+      pointRadius: typeof ds.pointRadius === "number" ? ds.pointRadius : 4,
+      visible: visibleDatasets[index],
+      hasData: Array.isArray(ds.data) && ds.data.length > 0,
+    }))
+    // ✅ THIS is the key line
+    .filter((item) => item.hasData);
 
   const filteredData = {
     ...data,
