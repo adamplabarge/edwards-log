@@ -38,7 +38,7 @@ function TimeSinceLastSeizureBase({ seizures }: Props) {
   return (
     <section className="mb-10 border-b-1 border-t-1 border-gray-900 py-4 px-2">
       <div className="flex flex-wrap items-center gap-3">
-        <span className="text-md font-medium text-gray-300">
+        <span className="text-md font-medium">
           Time since last seizure:
         </span>
 
@@ -49,7 +49,7 @@ function TimeSinceLastSeizureBase({ seizures }: Props) {
       </div>
 
       <div className="mt-1 text-md">
-        <span className="text-gray-300">Last seizure:</span> {lastDt.toLocaleString(DateTime.DATETIME_MED)}
+        <span>Last seizure:</span> {lastDt.toLocaleString(DateTime.DATETIME_MED)}
       </div>
     </section>
   );
