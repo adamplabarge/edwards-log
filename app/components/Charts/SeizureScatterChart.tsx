@@ -454,7 +454,7 @@ export default function SeizureScatterChart({
           display: "flex",
           flexDirection: "column",
           gap: "8px",
-          marginTop: "12px",
+          marginTop: "0",
           fontSize: "14px",
           color: textColor,
         }}

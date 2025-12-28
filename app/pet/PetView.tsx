@@ -12,7 +12,13 @@ import { SeizureClustersCard } from "./SeizureClusterCard";
 import { SeizureRollingFrequencySection } from "./SeizureRollingFrequencySection";
 import { LongestSeizureFreeStreak } from "./LongSeizureFreeStreak";
 import { SeizureTimeOfDayPieChart } from "@/app/components/Charts/SeizureTimeOfDayPieChart";
-import { SeizureTimeOfDayTrendChart } from "@/app/components/Charts/SeizuresTimeOfDayTrendChart";
+import { AverageSeizureFreePeriod } from "./AverageSeizureFreePeriod";
+import { MeanSeizureFreePeriod } from "./MeanSeizureFreePeriod";
+import {
+  shiftDateRange,
+  formatDateRange,
+  getDateRangeLengthInDays,
+} from "@/app/pet/utils";
 
 type PetViewProps = {
   pet: PetWithRelations;
@@ -54,6 +60,10 @@ export function PetView({
     else alert(data.error);
   };
 
+  const rangeLength = getDateRangeLengthInDays(startDate, endDate);
+  const previous = shiftDateRange(startDate, endDate, rangeLength);
+  const previousPrevious = shiftDateRange(startDate, endDate, rangeLength * 2);
+
   return (
     <main className="max-w-4xl mx-auto p-6 space-y-6">
       {/* Breadcrumb */}
@@ -73,9 +83,9 @@ export function PetView({
 
       <SeizureClustersCard seizures={pet.seizureEvents} />
       <TimeSinceLastSeizure seizures={pet.seizureEvents} />
-      
+
       {/* Date filters */}
-      <section className="flex flex-wrap gap-4 items-center">
+      <section className="flex flex-wrap gap-4 items-center border-b py-4 border-t">
         <label>
           Start:{" "}
           <input
@@ -108,10 +118,28 @@ export function PetView({
         </button>
       </section>
 
+      <div className="flex flex-col md:flex-row md:gap-4 align-items-stretch justify-between mb-8">
+        <LongestSeizureFreeStreak
+          seizureData={pet.seizureEvents}
+          startDate={startDate}
+          endDate={endDate}
+        />
+        <AverageSeizureFreePeriod
+          seizureData={pet.seizureEvents}
+          startDate={startDate}
+          endDate={endDate}
+        />
+        <MeanSeizureFreePeriod
+          seizureData={pet.seizureEvents}
+          startDate={startDate}
+          endDate={endDate}
+        />
+      </div>
+
       {/* Charts */}
       <section className="space-y-12">
         <h3 className="mb-2 text-lg font-semibold">Seizure Timeline Chart</h3>
-        <div className="w-full overflow-x-auto">
+        <div className="w-full overflow-x-auto mb-12">
           <SeizureScatterChart
             startDate={startDate}
             endDate={endDate}
@@ -123,27 +151,50 @@ export function PetView({
           />
         </div>
 
-        <h3 className="mb-2 text-lg font-semibold">Seizure Time-of-Day Trend</h3>
-        <div className="w-full overflow-x-auto">
-          <SeizureTimeOfDayPieChart
-            seizureData={pet.seizureEvents}
-            startDate={startDate}
-            endDate={endDate}
-          />
-        </div>
-        <div className="w-full overflow-x-auto">
-          <SeizureTimeOfDayTrendChart
-            seizureData={pet.seizureEvents}
-            startDate={startDate}
-            endDate={endDate}
-          />
-        </div>
+        <h3 className="mb-2 text-lg font-semibold">
+          Seizure Time-of-Day Trend
+        </h3>
 
-        <LongestSeizureFreeStreak
-          seizureData={pet.seizureEvents}
-          startDate={startDate}
-          endDate={endDate}
-        />
+        <div className="flex flex-col md:flex-row md:gap-4 justify-between mb-18">
+          {/* Current */}
+          <div>
+            <h4 className="mb-1 text-sm font-medium text-gray-600">
+              {formatDateRange(startDate, endDate)}
+            </h4>
+            <SeizureTimeOfDayPieChart
+              seizureData={pet.seizureEvents}
+              startDate={startDate}
+              endDate={endDate}
+            />
+          </div>
+
+          {/* Previous */}
+          <div>
+            <h4 className="mb-1 text-sm font-medium text-gray-600">
+              {formatDateRange(previous.startDate, previous.endDate)}
+            </h4>
+            <SeizureTimeOfDayPieChart
+              seizureData={pet.seizureEvents}
+              startDate={previous.startDate}
+              endDate={previous.endDate}
+            />
+          </div>
+
+          {/* Previous previous */}
+          <div>
+            <h4 className="mb-1 text-sm font-medium text-gray-600">
+              {formatDateRange(
+                previousPrevious.startDate,
+                previousPrevious.endDate
+              )}
+            </h4>
+            <SeizureTimeOfDayPieChart
+              seizureData={pet.seizureEvents}
+              startDate={previousPrevious.startDate}
+              endDate={previousPrevious.endDate}
+            />
+          </div>
+        </div>
 
         <SeizureRollingFrequencySection
           seizureData={pet.seizureEvents}
