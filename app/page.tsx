@@ -238,11 +238,20 @@ export default function HomePage() {
       <section className="max-w-4xl mx-auto px-4 mb-16 rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">Under Construction</h2>
         <p className="mb-2">
-          Edward’s Log is constantly evolving, and new features are on the
-          way—think custom tracking events and easy data downloads.
+          Edward’s Log is constantly evolving and new features are on the
+          way. Think custom tracking events and easy data downloads and more insightful charts.
         </p>
         <p className="mb-2">
-          Have an idea or feature request? Share it on my{" "}
+          Your privacy is our priority. We do not track or store personal
+          information—email addresses and passwords are safely handled by Auth0
+          and there are no user tracking analytics on this site.
+        </p>
+        <p className="mb-2">
+          Your data is not shared with third parties or mined for AI training.
+          If we change our data practices, we will notify you in advance.
+        </p>
+        <p className="mb-2">
+          Have an idea or feature request? Share it on {" "}
           <a
             className="text-blue-600 underline"
             href="https://github.com/adamplabarge/edwards-log/issues"
@@ -251,11 +260,16 @@ export default function HomePage() {
           >
             GitHub
           </a>
+           {" "}or connect with me on{" "}
+           <a
+            className="text-blue-600 underline"
+            href="https://www.linkedin.com/in/adamlabarge/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
           .
-        </p>
-        <p className="mb-2">
-          Your privacy is our priority. We do not track or store personal
-          information—email addresses and passwords are safely handled by Auth0.
         </p>
       </section>
     </div>
