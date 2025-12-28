@@ -161,11 +161,13 @@ export function PetView({
             <h4 className="mb-1 text-sm font-medium text-gray-600">
               {formatDateRange(startDate, endDate)}
             </h4>
-            <SeizureTimeOfDayPieChart
-              seizureData={pet.seizureEvents}
-              startDate={startDate}
-              endDate={endDate}
-            />
+            <div className="opacity-100">
+              <SeizureTimeOfDayPieChart
+                seizureData={pet.seizureEvents}
+                startDate={startDate}
+                endDate={endDate}
+              />
+            </div>
           </div>
 
           {/* Previous */}
@@ -173,11 +175,13 @@ export function PetView({
             <h4 className="mb-1 text-sm font-medium text-gray-600">
               {formatDateRange(previous.startDate, previous.endDate)}
             </h4>
-            <SeizureTimeOfDayPieChart
-              seizureData={pet.seizureEvents}
-              startDate={previous.startDate}
-              endDate={previous.endDate}
-            />
+            <div className="opacity-80">
+              <SeizureTimeOfDayPieChart
+                seizureData={pet.seizureEvents}
+                startDate={previous.startDate}
+                endDate={previous.endDate}
+              />
+            </div>
           </div>
 
           {/* Previous previous */}
@@ -188,11 +192,13 @@ export function PetView({
                 previousPrevious.endDate
               )}
             </h4>
-            <SeizureTimeOfDayPieChart
-              seizureData={pet.seizureEvents}
-              startDate={previousPrevious.startDate}
-              endDate={previousPrevious.endDate}
-            />
+            <div className="opacity-65">
+              <SeizureTimeOfDayPieChart
+                seizureData={pet.seizureEvents}
+                startDate={previousPrevious.startDate}
+                endDate={previousPrevious.endDate}
+              />
+            </div>
           </div>
         </div>
 
