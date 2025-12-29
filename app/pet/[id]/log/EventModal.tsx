@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { EventType } from "@/app/pet/types/EventType.type";
 import EventForm from "./EventForm";
 import { DateTime } from "luxon";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 type Props = {
   petId: string;
@@ -161,7 +162,14 @@ export default function EventModal({ petId, event, onClose }: Props) {
             disabled={loading}
             className="px-3 py-1 rounded bg-blue-600 text-white"
           >
-            Save
+            {loading ? (
+              <>
+                <ArrowPathIcon className="h-4 w-4 animate-spin" />
+                Saving…
+              </>
+            ) : (
+              "Save"
+            )}
           </button>
         </div>
       </div>
