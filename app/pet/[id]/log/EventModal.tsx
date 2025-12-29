@@ -163,10 +163,10 @@ export default function EventModal({ petId, event, onClose }: Props) {
             className="px-3 py-1 rounded bg-blue-600 text-white"
           >
             {loading ? (
-              <>
+              <div className="flex items-center gap-2">
                 <ArrowPathIcon className="h-4 w-4 animate-spin" />
                 Saving…
-              </>
+              </div>
             ) : (
               "Save"
             )}
