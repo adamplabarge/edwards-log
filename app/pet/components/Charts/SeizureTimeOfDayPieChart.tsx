@@ -107,7 +107,7 @@ export function SeizureTimeOfDayPieChart({
   // Render
   // ----------------------------------------
   return (
-    <div style={{ width: "100%", maxWidth: "400px", margin: "0 auto" }}>
+    <div style={{ width: "100%", maxWidth: "280px", margin: "0 auto" }}>
       <Pie data={data} options={options} />
     </div>
   );
