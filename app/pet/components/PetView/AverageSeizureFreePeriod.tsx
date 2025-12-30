@@ -1,8 +1,9 @@
 import { memo } from "react";
-import { useGetAverageSeizureFreePeriod } from "@/app/hooks/useGetAverageSeizureFreePeriod";
+import { useGetAverageSeizureFreePeriod } from "@/app/pet/hooks/useGetAverageSeizureFreePeriod";
+import { SeizureEvent } from "@/prisma/generated/client";
 
 type Props = {
-  seizureData: { date: Date }[];
+  seizureData: SeizureEvent[];
   startDate?: string;
   endDate?: string;
 };

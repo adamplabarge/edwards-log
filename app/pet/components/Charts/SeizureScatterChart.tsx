@@ -22,7 +22,7 @@ import {
 } from "@/prisma/generated/client";
 import { usePrefersDark } from "@/app/hooks/usePrefersDark";
 import { EVENT_COLORS } from "@/app/pet/constants";
-import { useGetLongestSeizureFreeStreak } from "@/app/hooks/useGetLongestSeizureFreeStreak";
+import { useGetLongestSeizureFreeStreak } from "@/app/pet/hooks/useGetLongestSeizureFreeStreak";
 
 ChartJS.register(
   LinearScale,
@@ -42,7 +42,7 @@ type Props = {
   activityData?: ActivityEvent[];
 };
 
-export default function SeizureScatterChart({
+export function SeizureScatterChart({
   startDate,
   endDate,
   seizureData,

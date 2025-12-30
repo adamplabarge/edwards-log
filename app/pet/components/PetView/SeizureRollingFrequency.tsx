@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, memo } from "react";
-import { SeizureRollingFrequencyChart } from "../components/Charts/SeizureRollingFrequencyChart";
+import { SeizureRollingFrequencyChart } from "../Charts/SeizureRollingFrequencyChart";
 import { InfoPopover } from "@/app/components/InfoPopover/InfoPopover";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
   endDate?: string;
 };
 
-function SeizureRollingFrequencySectionBase({ seizureData, startDate, endDate }: Props) {
+function SeizureRollingFrequencyBase({ seizureData, startDate, endDate }: Props) {
   const [windowDays, setWindowDays] = useState(7);
   const options = [7, 14, 21];
 
@@ -54,4 +54,4 @@ function SeizureRollingFrequencySectionBase({ seizureData, startDate, endDate }:
   );
 }
 
-export const SeizureRollingFrequencySection = memo(SeizureRollingFrequencySectionBase);
+export const SeizureRollingFrequency = memo(SeizureRollingFrequencyBase);

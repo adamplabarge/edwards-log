@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { useGetSeizureFreeGaps } from "./useGetSeizureFreeGaps";
+import { useGetSeizureFreeGaps } from "@/app/pet/hooks/useGetSeizureFreeGaps";
 
 export function useGetLongestSeizureFreeStreak(
   seizures: { date: Date }[],
