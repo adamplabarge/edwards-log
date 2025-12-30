@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@/app/components/Button/Button";
 
 type Props = {
   onClose: () => void;
@@ -32,6 +33,7 @@ export default function CreatePetModal({ onClose, onCreate }: Props) {
     <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center">
       <div className="bg-white dark:bg-gray-900 rounded w-full max-w-md p-6 space-y-4">
         <h2 className="text-lg font-semibold">Create New Pet</h2>
+
         <form className="space-y-3" onSubmit={handleSubmit}>
           <input
             type="text"
@@ -41,6 +43,7 @@ export default function CreatePetModal({ onClose, onCreate }: Props) {
             required
             className="w-full border rounded p-2"
           />
+
           <input
             type="text"
             value={type}
@@ -49,27 +52,29 @@ export default function CreatePetModal({ onClose, onCreate }: Props) {
             required
             className="w-full border rounded p-2"
           />
+
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Notes (optional)"
             className="w-full border rounded p-2"
           />
-          <div className="flex justify-end gap-2">
-            <button
+
+          <div className="flex justify-end gap-2 pt-2">
+            <Button
               type="button"
+              variant="tertiary"
               onClick={onClose}
-              className="px-3 py-1 border rounded"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+
+            <Button
               type="submit"
-              disabled={loading}
-              className="px-3 py-1 rounded bg-blue-600 text-white"
+              loading={loading}
             >
               Create
-            </button>
+            </Button>
           </div>
         </form>
       </div>
