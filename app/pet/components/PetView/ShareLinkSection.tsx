@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useState, useEffect } from "react";
 import { ClipboardIcon } from "@heroicons/react/24/outline";
 
 type ViewProps = {
@@ -10,6 +10,13 @@ export const ShareLinkSectionView = ({
   shareLink,
   createShareLink,
 }: ViewProps) => {
+  const [origin, setOrigin] = useState("");
+
+  // Run only on client
+  useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
+
   return (
     <section>
       {shareLink ? (
@@ -18,9 +25,7 @@ export const ShareLinkSectionView = ({
           <div className="mt-2 flex items-center gap-2">
             <button
               onClick={() =>
-                navigator.clipboard.writeText(
-                  window.location.origin + `/pet/share/${shareLink}`
-                )
+                navigator.clipboard.writeText(origin + `/pet/share/${shareLink}`)
               }
               className="p-2 rounded border hover:bg-gray-100 transition"
               title="Copy link"
@@ -32,7 +37,7 @@ export const ShareLinkSectionView = ({
             <input
               type="text"
               readOnly
-              value={window.location.origin + `/pet/share/${shareLink}`}
+              value={origin ? origin + `/pet/share/${shareLink}` : ""}
               className="flex-1 border rounded px-2 py-1 text-sm"
             />
           </div>
@@ -45,6 +50,7 @@ export const ShareLinkSectionView = ({
     </section>
   );
 };
+
 
 type Props = {
   petId: string;
