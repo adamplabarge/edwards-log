@@ -1,4 +1,4 @@
-import { useGetSeizureFreeGaps } from "@/app/hooks/useGetSeizureFreeGaps";
+import { useGetSeizureFreeGaps } from "@/app/pet/hooks/useGetSeizureFreeGaps";
 
 export function useGetAverageSeizureFreePeriod(
   seizures: { date: Date }[],

@@ -1,8 +1,9 @@
 import { memo } from "react";
-import { useGetLongestSeizureFreeStreak } from "@/app/hooks/useGetLongestSeizureFreeStreak";
+import { useGetLongestSeizureFreeStreak } from "@/app/pet/hooks/useGetLongestSeizureFreeStreak";
+import { SeizureEvent } from "@/prisma/generated/client";
 
 type Props = {
-  seizureData: { id: string; petId: string; date: Date; notes: string | null; createdAt: Date; }[];
+  seizureData: SeizureEvent[];
   startDate?: string;
   endDate?: string;
 };

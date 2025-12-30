@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
-import { PetView } from "@/app/pet/PetView";
+import { PetView } from "@/app/pet/components/PetView/PetView";
 
 type PageProps = {
   params: Promise<{ id: string }>;

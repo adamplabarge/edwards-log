@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import { PetView } from "@/app/pet/PetView";
+import { PetView } from "@/app/pet/components/PetView/PetView";
 
 export const dynamic = "force-dynamic";
 
