@@ -5,6 +5,7 @@ import { PetWithRelations } from "../../types/PetWithRelations.type";
 import EventModal from "./EventModal";
 import EventList from "./EventList";
 import Link from "next/link";
+import { Button } from "@/app/components/Button/Button";
 
 type LogEventViewProps = {
   pet: PetWithRelations;
@@ -25,20 +26,21 @@ export default function LogEventView({ pet }: LogEventViewProps) {
 
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Events for {pet.name}</h1>
+        <h1 className="text-2xl font-bold">
+          Events for {pet.name}
+        </h1>
 
-        <button
+        <Button
+          variant="secondary"
           onClick={() => {
             setEditingEvent(null);
             setModalOpen(true);
           }}
-          className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-800"
         >
           Create Event
-        </button>
+        </Button>
       </div>
 
-      {/* Event list */}
       <EventList
         pet={pet}
         onEdit={(event) => {
@@ -47,7 +49,6 @@ export default function LogEventView({ pet }: LogEventViewProps) {
         }}
       />
 
-      {/* Modal */}
       {modalOpen && (
         <EventModal
           petId={pet.id}

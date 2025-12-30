@@ -6,6 +6,7 @@ import { EventType } from "@/app/pet/types/EventType.type";
 import EventForm from "./EventForm";
 import { DateTime } from "luxon";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
+import { Button } from "@/app/components/Button/Button";
 
 type Props = {
   petId: string;
@@ -154,23 +155,12 @@ export default function EventModal({ petId, event, onClose }: Props) {
 
         {/* Actions */}
         <div className="flex justify-end gap-2">
-          <button onClick={onClose} className="px-3 py-1 border rounded">
+          <Button variant="tertiary" type="button" onClick={onClose}>
             Cancel
-          </button>
-          <button
-            onClick={save}
-            disabled={loading}
-            className="px-3 py-1 rounded bg-blue-600 text-white"
-          >
-            {loading ? (
-              <div className="flex items-center gap-2">
-                <ArrowPathIcon className="h-4 w-4 animate-spin" />
-                Saving…
-              </div>
-            ) : (
-              "Save"
-            )}
-          </button>
+          </Button>
+          <Button type="button" onClick={save} loading={loading}>
+            Save
+          </Button>
         </div>
       </div>
     </div>

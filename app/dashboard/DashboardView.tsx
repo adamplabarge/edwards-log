@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Pet } from "@/prisma/generated/client";
 import Link from "next/link";
 import CreatePetModal from "@/app/dashboard/CreatePetModal";
+import { Button } from "@/app/components/Button/Button";
 
 type DashboardViewProps = {
   pets: Pet[];
@@ -22,12 +23,13 @@ export function DashboardView({
     <main className="max-w-2xl mx-auto p-6">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Your Pets</h1>
-        <button
-          className="bg-blue-600 hover:bg-blue-800 text-white px-4 py-2 rounded"
+
+        <Button
+          variant="secondary"
           onClick={() => setShowModal(true)}
         >
           Create Pet
-        </button>
+        </Button>
       </div>
 
       {pets.length === 0 ? (
@@ -47,26 +49,25 @@ export function DashboardView({
                   <p className="text-sm text-gray-600">{pet.notes}</p>
                 )}
               </span>
+
               <span className="flex gap-2">
-                <Link
-                  href={`/pet/${pet.id}`}
-                  className="text-sm px-3 py-1 rounded bg-blue-600 hover:bg-blue-800 whitespace-nowrap"
-                >
-                  Charts
-                </Link>
-                <Link
-                  href={`/pet/${pet.id}/log`}
-                  className="text-sm px-3 py-1 rounded bg-blue-600 hover:bg-blue-800 whitespace-nowrap"
-                >
-                  Log Event
-                </Link>
+                <Button asChild>
+                  <Link href={`/pet/${pet.id}`}>
+                    Charts
+                  </Link>
+                </Button>
+
+                <Button asChild>
+                  <Link href={`/pet/${pet.id}/log`}>
+                    Log Event
+                  </Link>
+                </Button>
               </span>
             </li>
           ))}
         </ul>
       )}
 
-      {/* Create Pet Modal */}
       {showModal && (
         <CreatePetModal
           onClose={() => setShowModal(false)}

@@ -1,9 +1,9 @@
 "use client";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
-import LoginButton from "@/app/components/LoginButton/LoginButton";
-import LogoutButton from "@/app/components/LogoutButton/LogoutButton";
-import SignupButton from "@/app/components/SignupButton/SignupButton";
+import LoginButton from "@/app/components/Button/LoginButton/LoginButton";
+import LogoutButton from "@/app/components/Button/LogoutButton/LogoutButton";
+import SignupButton from "@/app/components/Button/SignupButton/SignupButton";
 import Link from "next/link";
 
 export default function Header() {
