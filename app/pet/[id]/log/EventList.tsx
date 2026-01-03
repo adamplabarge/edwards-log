@@ -134,7 +134,7 @@ export default function EventList({ pet, onEdit }: Props) {
                             <span className="separator text-gray-400 w-[10%] flex justify-center">
                               -
                             </span>{" "}
-                            <span className="date text-gray-500 w-[60%]">
+                            <span className="date text-gray-500 w-[60%] whitespace-pre-line">
                               {event.eventType === "activity" &&
                               "endDate" in event &&
                               event.endDate
@@ -142,7 +142,7 @@ export default function EventList({ pet, onEdit }: Props) {
                                     event.date
                                   ).toLocaleString(
                                     DateTime.DATETIME_MED
-                                  )} ${"\u00A0"} (${formatDuration(
+                                  )}\n(${formatDuration(
                                     event.date,
                                     event.endDate as string
                                   )})`
