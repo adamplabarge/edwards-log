@@ -3,7 +3,12 @@ import { UnifiedEvent } from "@/app/pet/types/UnifiedEvent.type";
 import { DateTime } from "luxon";
 import { useState } from "react";
 import EventFilters from "./EventFilters";
-import { formatDuration, getEventColor, getEventLabel, isSameDay } from "./utils";
+import {
+  formatDuration,
+  getEventColor,
+  getEventLabel,
+  isSameDay,
+} from "./utils";
 import { EVENT_COLORS } from "@/app/pet/constants";
 import { EventMenu } from "./EventMenu";
 
@@ -118,21 +123,32 @@ export default function EventList({ pet, onEdit }: Props) {
 
                       {/* Event item */}
                       <div
-                        className="border-l-4 rounded p-3 flex gap-4"
+                        className="border-l-4 rounded p-3 flex gap-0"
                         style={{ borderColor: getEventColor(event) }}
                       >
                         <div className="flex-1 space-y-1">
-                          <div className="flex items-center gap-2 text-sm">
-                            <span className="font-medium capitalize">
+                          <div className="flex items-start gap-2 text-sm">
+                            <span className="font-medium capitalize w-[30%]">
                               {getEventLabel(event)}
                             </span>
-                            <span className="text-gray-400">·</span>
-                            <span className="text-gray-500">
-                              {event.eventType === "activity" && "endDate" in event && event.endDate
-                                ? `${DateTime.fromISO(event.date).toLocaleString(
+                            <span className="separator text-gray-400 w-[10%] flex justify-center">
+                              -
+                            </span>{" "}
+                            <span className="date text-gray-500 w-[60%]">
+                              {event.eventType === "activity" &&
+                              "endDate" in event &&
+                              event.endDate
+                                ? `${DateTime.fromISO(
+                                    event.date
+                                  ).toLocaleString(
                                     DateTime.DATETIME_MED
-                                  )} (${formatDuration(event.date, event.endDate as string)})`
-                                : DateTime.fromISO(event.date).toLocaleString(DateTime.DATETIME_MED)}
+                                  )} ${"\u00A0"} (${formatDuration(
+                                    event.date,
+                                    event.endDate as string
+                                  )})`
+                                : DateTime.fromISO(event.date).toLocaleString(
+                                    DateTime.DATETIME_MED
+                                  )}
                             </span>
                           </div>
 
