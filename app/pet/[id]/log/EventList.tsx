@@ -131,10 +131,10 @@ export default function EventList({ pet, onEdit }: Props) {
                             <span className="font-medium capitalize w-[30%]">
                               {getEventLabel(event)}
                             </span>
-                            <span className="separator text-gray-400 w-[10%] flex justify-center">
+                            <span className="separator text-gray-400 w-[5%] flex justify-center">
                               -
                             </span>{" "}
-                            <span className="date text-gray-500 w-[60%] whitespace-pre-line">
+                            <span className="date text-gray-500 w-[65%] whitespace-pre-line">
                               {event.eventType === "activity" &&
                               "endDate" in event &&
                               event.endDate
