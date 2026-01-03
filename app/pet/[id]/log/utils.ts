@@ -25,9 +25,9 @@ export function getEventLabel(event: UnifiedEvent) {
         : "Feeding";
     case "medication":
       return (event as any).type === "ASM"
-        ? "Antiseizure Medication"
+        ? "Medication (Antiseizure)"
         : (event as any).type === "OTHER"
-        ? "Other Medication"
+        ? "Medication (Other)"
         : "Medication";
     case "activity":
       return (event as any).type
